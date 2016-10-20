@@ -1,0 +1,9 @@
+﻿
+.combobox-item {
+	cursor : pointer;
+}
+
+.datagrid-header-row,
+.datagrid-row {
+  height: 30px;
+}

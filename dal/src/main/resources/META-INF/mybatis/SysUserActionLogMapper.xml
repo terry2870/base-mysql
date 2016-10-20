@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.dal.ISysUserActionLogDAO">
+	<resultMap id="BaseResultMap" type="com.base.dal.model.SysUserActionLog">
+		<id column="log_id" property="logId" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="log_type" property="logType" jdbcType="TINYINT" />
+		<result column="user_ip" property="userIp" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="INTEGER" />
+		<result column="log_class" property="logClass" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.base.dal.model.SysUserActionLog"
+		extends="BaseResultMap">
+		<result column="log_info" property="logInfo" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		log_id, user_id, log_type, user_ip, create_time, log_class
+	</sql>
+	<sql id="Blob_Column_List">
+		log_info
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from sys_user_action_log
+		where log_id = #{logId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_user_action_log
+		where log_id = #{logId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.base.dal.model.SysUserActionLog">
+		insert into sys_user_action_log (log_id, user_id, log_type,
+		user_ip, create_time, log_class,
+		log_info)
+		values (#{logId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{logType,jdbcType=TINYINT},
+		#{userIp,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, #{logClass,jdbcType=VARCHAR},
+		#{logInfo,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.base.dal.model.SysUserActionLog">
+		insert into sys_user_action_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logId != null">
+				log_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="logType != null">
+				log_type,
+			</if>
+			<if test="userIp != null">
+				user_ip,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="logClass != null">
+				log_class,
+			</if>
+			<if test="logInfo != null">
+				log_info,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="logId != null">
+				#{logId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="logType != null">
+				#{logType,jdbcType=TINYINT},
+			</if>
+			<if test="userIp != null">
+				#{userIp,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=INTEGER},
+			</if>
+			<if test="logClass != null">
+				#{logClass,jdbcType=VARCHAR},
+			</if>
+			<if test="logInfo != null">
+				#{logInfo,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.base.dal.model.SysUserActionLog">
+		update sys_user_action_log
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="logType != null">
+				log_type = #{logType,jdbcType=TINYINT},
+			</if>
+			<if test="userIp != null">
+				user_ip = #{userIp,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=INTEGER},
+			</if>
+			<if test="logClass != null">
+				log_class = #{logClass,jdbcType=VARCHAR},
+			</if>
+			<if test="logInfo != null">
+				log_info = #{logInfo,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where log_id = #{logId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.base.dal.model.SysUserActionLog">
+		update sys_user_action_log
+		set user_id = #{userId,jdbcType=INTEGER},
+		log_type = #{logType,jdbcType=TINYINT},
+		user_ip = #{userIp,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=INTEGER},
+		log_class = #{logClass,jdbcType=VARCHAR},
+		log_info = #{logInfo,jdbcType=LONGVARCHAR}
+		where log_id = #{logId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.base.dal.model.SysUserActionLog">
+		update sys_user_action_log
+		set user_id = #{userId,jdbcType=INTEGER},
+		log_type = #{logType,jdbcType=TINYINT},
+		user_ip = #{userIp,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=INTEGER},
+		log_class = #{logClass,jdbcType=VARCHAR}
+		where log_id = #{logId,jdbcType=INTEGER}
+	</update>
+</mapper>

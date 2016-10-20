@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.dal.ISysUserDAO">
+	<resultMap id="BaseResultMap" type="com.base.dal.model.SysUser">
+		<id column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
+		<result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="create_user_id" property="createUserId"
+			jdbcType="INTEGER" />
+		<result column="last_login_time" property="lastLoginTime"
+			jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="INTEGER" />
+		<result column="update_time" property="updateTime" jdbcType="INTEGER" />
+		<result column="store_id" property="storeId" jdbcType="INTEGER" />
+		<result column="identity" property="identity" jdbcType="TINYINT" />
+		
+		<result column="store_name" property="storeName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		user_id, user_name, login_name, login_pwd, mobile, phone_number, address,
+		email,
+		status, create_user_id, last_login_time, create_time, update_time, store_id, identity
+	</sql>
+	<sql id="selectSysUserListSQL">
+		LEFT JOIN store_info si ON user.store_id=si.id
+		where 1=1
+		<if test="user.userName != null and user.userName != ''">
+			and instr(user.user_name, #{user.userName}) &gt;0
+		</if>
+		<if test="user.loginName != null and user.loginName != ''">
+			and instr(user.login_name, #{user.loginName}) &gt;0
+		</if>
+		<if test="user.storeId != null and user.storeId != 0">
+			and user.store_id=#{user.storeId}
+		</if>
+		<if test="user.identity != null and user.identity != 0">
+			and user.identity=#{user.identity}
+		</if>
+		<if test="user.status != null and user.status != 0">
+			and user.status=#{user.status}
+		</if>
+		<if test="opera.normalUser == true">
+			AND EXISTS (SELECT 1 FROM sys_user u WHERE user.create_user_id=u.user_id AND FIND_IN_SET(u.user_id, getChildUserById(#{opera.user.userId})))
+		</if>
+		<if test="opera.manager == true">
+			AND EXISTS (SELECT 1 FROM sys_user u WHERE user.create_user_id=u.user_id AND u.store_id=#{opera.user.storeId})
+		</if>
+	</sql>
+	<select id="login" resultMap="BaseResultMap">
+		select * from sys_user where login_name=#{loginName} and login_pwd=#{loginPwd} and status=1;
+	</select>
+	<select id="selectByCreateUserId" resultMap="BaseResultMap">
+		select * from sys_user where status=1 and create_user_id=#{createUserId}
+	</select>
+	<select id="selectSysUserList" resultMap="BaseResultMap">
+		select user.*, si.store_name from sys_user user 
+		<include refid="selectSysUserListSQL" />
+		<if test="page.sortColumn != null and page.sortColumn != ''">
+			order by ${page.sortColumn} ${page.order}
+		</if>
+		<if test="page.pageSize != 0">
+			limit #{page.startIndex},#{page.pageSize}
+		</if>
+	</select>
+	<select id="selectSysUserTotal" resultType="java.lang.Integer">
+		select count(1) from sys_user user 
+		<include refid="selectSysUserListSQL" />
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+		where user_id = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectByLoginNameOrUserName" resultMap="BaseResultMap">
+		select * from sys_user where 1=1
+		<if test="loginName != null and loginName != ''">
+			and login_name=#{loginName}
+		</if>
+		<if test="userName != null and userName != ''">
+			and user_name=#{userName}
+		</if>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_user
+		where user_id = #{userId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.base.dal.model.SysUser" keyProperty="userId" useGeneratedKeys="true">
+		insert into sys_user (user_name, login_name, login_pwd, mobile, phone_number, address, email, status, create_user_id, last_login_time, create_time, update_time, store_id, identity)
+		values (#{userName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createUserId,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
+		#{updateTime,jdbcType=INTEGER}, #{storeId}, #{identity})
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.base.dal.model.SysUser">
+		update sys_user
+		<set>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="loginName != null">
+				login_name = #{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="loginPwd != null">
+				login_pwd = #{loginPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneNumber != null">
+				phone_number = #{phoneNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="createUserId != null">
+				create_user_id = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="lastLoginTime != null">
+				last_login_time = #{lastLoginTime,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=INTEGER},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=INTEGER},
+			</if>
+			<if test="storeId != null">
+				store_id = #{storeId},
+			</if>
+			<if test="identity != null">
+				identity = #{identity},
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.base.dal.model.SysUser">
+		update sys_user
+		set user_name = #{userName,jdbcType=VARCHAR},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		phone_number = #{phoneNumber,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		status = #{status,jdbcType=TINYINT},
+		update_time = #{updateTime,jdbcType=INTEGER},
+		store_id = #{storeId}, identity = #{identity}
+		where user_id = #{userId,jdbcType=INTEGER}
+	</update>
+</mapper>

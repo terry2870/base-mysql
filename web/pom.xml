@@ -17,6 +17,10 @@
 			<groupId>com.base</groupId>
 			<artifactId>base-mysql-mvc</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.base</groupId>
+			<artifactId>base-mysql-model</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<defaultGoal>compile</defaultGoal>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.dal.ISysRoleDAO">
+	<resultMap id="BaseResultMap" type="com.base.dal.model.SysRole">
+		<id column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="role_info" property="roleInfo" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="create_user_id" property="createUserId"
+			jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="INTEGER" />
+		<result column="update_time" property="updateTime" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		role_id, role_name, role_info, status, create_user_id, create_time,
+		update_time
+	</sql>
+	<sql id="selectSysRoleListSQL">
+		<if test="role.roleName != null and role.roleName != ''">
+			and instr(role.role_name, #{role.roleName}) &gt;0
+		</if>
+		<if test="role.status != null and role.status != 0">
+			and role.status=#{role.status}
+		</if>
+		<if test="opera.normalUser == true">
+			AND EXISTS (SELECT 1 FROM sys_user u WHERE role.create_user_id=u.user_id AND FIND_IN_SET(u.user_id, getChildUserById(#{opera.user.userId})))
+		</if>
+		<if test="opera.manager == true">
+			AND EXISTS (SELECT 1 FROM sys_user u WHERE role.create_user_id=u.user_id AND u.store_id=#{opera.user.storeId})
+		</if>
+	</sql>
+	<select id="selectByRoleName" resultMap="BaseResultMap">
+		select * from sys_role where role_name = #{roleName}
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from sys_role
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</select>
+	<select id="selectSysRoleList" resultMap="BaseResultMap">
+		select * from sys_role role where 1=1
+		<include refid="selectSysRoleListSQL" />
+		
+		<if test="page.sortColumn != null and page.sortColumn != ''">
+			order by ${page.sortColumn} ${page.order}
+		</if>
+		<if test="page.pageSize != 0">
+			limit #{page.startIndex},#{page.pageSize}
+		</if>
+	</select>
+	<select id="selectSysRoleTotal" resultType="java.lang.Integer">
+		select count(1) from sys_role role where 1=1
+		<include refid="selectSysRoleListSQL" />
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_role
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.base.dal.model.SysRole">
+		insert into sys_role (role_name, role_info,
+		status, create_user_id, create_time,
+		update_time)
+		values (#{roleName,jdbcType=VARCHAR},
+		#{roleInfo,jdbcType=VARCHAR},
+		#{status,jdbcType=TINYINT}, #{createUserId,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
+		#{updateTime,jdbcType=INTEGER})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.base.dal.model.SysRole">
+		update sys_role
+		<set>
+			<if test="roleName != null">
+				role_name = #{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleInfo != null">
+				role_info = #{roleInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="createUserId != null">
+				create_user_id = #{createUserId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=INTEGER},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=INTEGER},
+			</if>
+		</set>
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.base.dal.model.SysRole">
+		update sys_role
+		set role_name = #{roleName,jdbcType=VARCHAR},
+		role_info = #{roleInfo,jdbcType=VARCHAR},
+		status = #{status,jdbcType=TINYINT},
+		update_time = #{updateTime,jdbcType=INTEGER}
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</update>
+</mapper>

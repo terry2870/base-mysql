@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.dal.ISysUserGroupUserDAO">
+	<resultMap id="BaseResultMap" type="com.base.dal.model.SysUserGroupUser">
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="group_id" property="groupId" jdbcType="INTEGER" />
+	</resultMap>
+	<insert id="insert" parameterType="com.base.dal.model.SysUserGroupUser">
+		insert into sys_user_group_user (user_id, group_id)
+		values (#{userId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.base.dal.model.SysUserGroupUser">
+		insert into sys_user_group_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="groupId != null">
+				group_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="groupId != null">
+				#{groupId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

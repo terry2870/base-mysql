@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 table</title>
+    <!-- Bootstrap -->
+    <link href="../../../js/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="../../../js/jquery/jquery-3.1.1.min.js" charset="UTF-8" type="text/javascript"></script>
+	<script src="../../../js/bootstrap/bootstrap.min.js"></script>
+	<script src="../../../js/jquery/plugins/jquery.hp.plugin.js"></script>
+	<script src="../../../js/jquery/plugins/jquery.loadSuccess.js"></script>
+	<script src="../../../js/bootstrap/bootstrap-plugin/bootstrap.panel.js"></script>
+	<script src="../../../js/bootstrap/bootstrap-plugin/bootstrap.table2.js"></script>
+	
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row clearfix" id="topBanner" style="background-color: #337ab7;color: white">
+		top
+	</div>
+	<div class="row clearfix" style="margin-top: 4px">
+		<div class="col-md-2 column" id="left">
+			<div id="panel"></div>
+			<button id="show">show</button>
+			<button id="hide">hide</button>
+			<button id="showBody">showBody</button>
+			<button id="hideBody">hideBody</button>
+		</div>
+		<div class="col-md-10 column" id="body">
+			<div id="table"></div>
+		</div>
+	</div>
+</div>
+
+	<script>
+		var d = $(".container-fluid").find("> div:first");
+		
+		var data = [
+			{"id":1,"name":"name1"},
+			{"id":2,"name":"name2"},
+			{"id":3,"name":"name3"},
+			{"id":4,"name":"name4"},
+			{"id":5,"name":"name5"},
+			{"id":6,"name":"name6"},
+			{"id":7,"name":"name7"},
+			{"id":8,"name":"name8"},
+			{"id":9,"name":"name9"},
+			{"id":10,"name":"name10"},
+			{"id":11,"name":"name11"},
+			{"id":12,"name":"name12"}
+			
+		];
+
+		
+		$(function() {
+			$("#show").click(function() {
+				$("#panel").panel("show", {
+					effect : "slide",
+					speed : "slow"
+				});
+			});
+			$("#hide").click(function() {
+				$("#panel").panel("hide", {
+					effect : "slide",
+					speed : "slow"
+				});
+			});
+			$("#showBody").click(function() {
+				$("#panel").panel("showBody", {
+					effect : "slide",
+					speed : "slow"
+				});
+			});
+			$("#hideBody").click(function() {
+				$("#panel").panel("hideBody", {
+					effect : "slide",
+					speed : "slow"
+				});
+			});
+			$("#panel").panel({
+				className : $.myPlugin.bootstrapClass.INFO,
+				title : "面板",
+				content : "阿斯顿发斯蒂芬"
+				//showFooter : true
+			});
+		
+			
+			$("#table").table({
+				pagination : true,
+				data : data,
+				title : "表格",
+				columns : [{
+					width : 100,
+					title : "id",
+					field : "id"
+				}, {
+					width : 100,
+					title : "name",
+					field : "name"
+				}]
+			});
+		});
+	</script>
+	
+</body>
+</html>

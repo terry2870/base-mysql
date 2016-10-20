@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.dal.ISysUserRegionDAO">
+	<resultMap id="BaseResultMap" type="com.base.dal.model.SysUserRegion">
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="region_id" property="regionId" jdbcType="INTEGER" />
+	</resultMap>
+	<insert id="insert" parameterType="com.base.dal.model.SysUserRegion">
+		insert into sys_user_region (user_id, region_id)
+		values (#{userId,jdbcType=INTEGER}, #{regionId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.base.dal.model.SysUserRegion">
+		insert into sys_user_region
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="regionId != null">
+				region_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="regionId != null">
+				#{regionId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

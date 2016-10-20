@@ -1,0 +1,62 @@
+/**
+ * 
+ */
+package com.base.common.interceptor;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.QueryTimeoutException;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.alibaba.fastjson.support.spring.FastJsonJsonView;
+import com.base.common.enums.CodeEnum;
+import com.base.common.exceptions.NoRightException;
+
+/**
+ * @author huangping 2016年8月24日 上午1:02:17
+ */
+public class BaseExceptionHandler implements HandlerExceptionResolver {
+
+	static Logger log = LoggerFactory.getLogger(BaseExceptionHandler.class);
+
+	@Override
+	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object paramObject, Exception exception) {
+		log.error("enter resolveException with exception={}", exception);
+		if (exception == null) {
+			return null;
+		}
+		// 数据库超时异常，特殊处理
+		if (exception instanceof QueryTimeoutException) {
+			response.setStatus(CodeEnum.DATABASE_TIME_OUT.getCode());
+			return getErrorJsonView(CodeEnum.DATABASE_TIME_OUT.getCode(), CodeEnum.DATABASE_TIME_OUT.getMessage());
+		}
+		if (exception instanceof NoRightException) {
+			NoRightException e = (NoRightException) exception;
+			response.setStatus(e.getCode());
+			return getErrorJsonView(e.getCode(), e.getMessage());
+		}
+		response.setStatus(CodeEnum.ERROR.getCode());
+		return getErrorJsonView(CodeEnum.ERROR.getCode(), CodeEnum.ERROR.getMessage());
+	}
+
+	/**
+	 * 使用FastJson提供的FastJsonJsonView视图返回，不需要捕获异常
+	 */
+	public static ModelAndView getErrorJsonView(int code, String message) {
+		ModelAndView modelAndView = new ModelAndView();
+		FastJsonJsonView jsonView = new FastJsonJsonView();
+		Map<String, Object> errorInfoMap = new HashMap<>();
+		errorInfoMap.put("code", code);
+		errorInfoMap.put("message", message);
+		jsonView.setAttributesMap(errorInfoMap);
+		modelAndView.setView(jsonView);
+		return modelAndView;
+	}
+}
