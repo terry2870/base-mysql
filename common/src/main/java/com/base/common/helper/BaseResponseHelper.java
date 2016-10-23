@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.base.model.response.BaseResponseBO;
+import com.hp.tools.common.enums.StatusEnum;
+import com.hp.tools.common.utils.DateUtil;
 
 /**
  * @author huangping
@@ -30,6 +32,10 @@ public class BaseResponseHelper {
 		if (CollectionUtils.isEmpty(list)) {
 			return;
 		}
-		
+		for (BaseResponseBO bo : list) {
+			bo.setUpdateTimeStr(bo.getUpdateTime() == null ? "" : DateUtil.int2DateStr(bo.getUpdateTime()));
+			bo.setStatusStr(bo.getStatus() == null ? "" : StatusEnum.getEnumByValue(bo.getStatus()).getText());
+			bo.setCreateTimeStr(bo.getCreateTime() == null ? "" : DateUtil.int2DateStr(bo.getCreateTime()));
+		}
 	}
 }
