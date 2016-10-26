@@ -17,27 +17,20 @@
 			jdbcType="INTEGER" />
 		<result column="create_time" property="createTime" jdbcType="INTEGER" />
 		<result column="update_time" property="updateTime" jdbcType="INTEGER" />
-		<result column="store_id" property="storeId" jdbcType="INTEGER" />
 		<result column="identity" property="identity" jdbcType="TINYINT" />
-		
-		<result column="store_name" property="storeName" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		user_id, user_name, login_name, login_pwd, mobile, phone_number, address,
 		email,
-		status, create_user_id, last_login_time, create_time, update_time, store_id, identity
+		status, create_user_id, last_login_time, create_time, update_time, identity
 	</sql>
 	<sql id="selectSysUserListSQL">
-		LEFT JOIN store_info si ON user.store_id=si.id
 		where 1=1
 		<if test="user.userName != null and user.userName != ''">
 			and instr(user.user_name, #{user.userName}) &gt;0
 		</if>
 		<if test="user.loginName != null and user.loginName != ''">
 			and instr(user.login_name, #{user.loginName}) &gt;0
-		</if>
-		<if test="user.storeId != null and user.storeId != 0">
-			and user.store_id=#{user.storeId}
 		</if>
 		<if test="user.identity != null and user.identity != 0">
 			and user.identity=#{user.identity}
@@ -48,9 +41,6 @@
 		<if test="opera.normalUser == true">
 			AND EXISTS (SELECT 1 FROM sys_user u WHERE user.create_user_id=u.user_id AND FIND_IN_SET(u.user_id, getChildUserById(#{opera.user.userId})))
 		</if>
-		<if test="opera.manager == true">
-			AND EXISTS (SELECT 1 FROM sys_user u WHERE user.create_user_id=u.user_id AND u.store_id=#{opera.user.storeId})
-		</if>
 	</sql>
 	<select id="login" resultMap="BaseResultMap">
 		select * from sys_user where login_name=#{loginName} and login_pwd=#{loginPwd} and status=1;
@@ -59,7 +49,7 @@
 		select * from sys_user where status=1 and create_user_id=#{createUserId}
 	</select>
 	<select id="selectSysUserList" resultMap="BaseResultMap">
-		select user.*, si.store_name from sys_user user 
+		select user.* from sys_user user 
 		<include refid="selectSysUserListSQL" />
 		<if test="page.sortColumn != null and page.sortColumn != ''">
 			order by ${page.sortColumn} ${page.order}
@@ -95,10 +85,10 @@
 		where user_id = #{userId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.base.dal.model.SysUser" keyProperty="userId" useGeneratedKeys="true">
-		insert into sys_user (user_name, login_name, login_pwd, mobile, phone_number, address, email, status, create_user_id, last_login_time, create_time, update_time, store_id, identity)
+		insert into sys_user (user_name, login_name, login_pwd, mobile, phone_number, address, email, status, create_user_id, last_login_time, create_time, update_time, identity)
 		values (#{userName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
 		#{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createUserId,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
-		#{updateTime,jdbcType=INTEGER}, #{storeId}, #{identity})
+		#{updateTime,jdbcType=INTEGER}, #{identity})
 	</insert>
 	
 	<update id="updateByPrimaryKeySelective" parameterType="com.base.dal.model.SysUser">
@@ -140,9 +130,6 @@
 			<if test="updateTime != null">
 				update_time = #{updateTime,jdbcType=INTEGER},
 			</if>
-			<if test="storeId != null">
-				store_id = #{storeId},
-			</if>
 			<if test="identity != null">
 				identity = #{identity},
 			</if>
@@ -157,8 +144,7 @@
 		address = #{address,jdbcType=VARCHAR},
 		email = #{email,jdbcType=VARCHAR},
 		status = #{status,jdbcType=TINYINT},
-		update_time = #{updateTime,jdbcType=INTEGER},
-		store_id = #{storeId}, identity = #{identity}
+		update_time = #{updateTime,jdbcType=INTEGER}
 		where user_id = #{userId,jdbcType=INTEGER}
 	</update>
 </mapper>

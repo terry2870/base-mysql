@@ -45,10 +45,6 @@
 			<td id="roleIdTD"></td>
 		</tr>
 		<tr>
-			<td align="right">所属门店：</td>
-			<td><input name="storeId" id="storeId" /></td>
-		</tr>
-		<tr>
 			<td align="right">用户身份：</td>
 			<td><input name="identity" id="identity" /></td>
 		</tr>
@@ -62,25 +58,6 @@
 </form>
 <script>
 	$(function() {
-		
-		//门店
-		$("#userEditForm #storeId").myCombobox({
-			required : true,
-			textField : "storeName",
-			valueField : "id",
-			url : "<t:path/>/StoreInfoController/queryAllStoreInfo.do",
-			queryParams : {
-				rows : 0,
-				status : "<%=StatusEnum.OPEN.getValue()%>"
-			},
-			value : "<t:write name='storeId' />",
-			panelHeight : 200,
-			editable : false,
-			loadFilter : function(data) {
-				data = defaultLoadFilter(data);
-				return data ? data.rows : [];
-			}
-		});
 		
 		//身份
 		$("#userEditForm #identity").myCombobox({

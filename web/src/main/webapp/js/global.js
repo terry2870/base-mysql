@@ -1,6 +1,6 @@
 
 var CODE_SUCCESS = 200;
-
+var contextPath = "/base-mysql";
 
 $.ajaxSetup({
 	cache : false,

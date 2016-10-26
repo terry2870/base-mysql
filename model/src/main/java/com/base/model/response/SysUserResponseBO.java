@@ -29,12 +29,9 @@ public class SysUserResponseBO extends BaseResponseBO {
 	private String email;
 
 	private Integer lastLoginTime;
-	
-	private Integer storeId;
-	
+		
 	private Byte identity;
 	
-	private String storeName;
 	private String identityStr;
 	
 
@@ -116,22 +113,6 @@ public class SysUserResponseBO extends BaseResponseBO {
 
 	public void setIdentity(Byte identity) {
 		this.identity = identity;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
 	}
 
 	public String getIdentityStr() {

@@ -31,12 +31,9 @@ public class SysUser extends BaseBean {
 
 	private Integer updateTime;
 	
-	private Integer storeId;
 	
 	private Byte identity;
 	
-	private String storeName;
-
 	public Integer getUserId() {
 		return userId;
 	}
@@ -141,27 +138,11 @@ public class SysUser extends BaseBean {
 		this.updateTime = updateTime;
 	}
 
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-
 	public Byte getIdentity() {
 		return identity;
 	}
 
 	public void setIdentity(Byte identity) {
 		this.identity = identity;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
 	}
 }

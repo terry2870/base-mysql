@@ -171,15 +171,6 @@
 				width : 100,
 				align : "center"
 			}, {
-				title : "所属门店",
-				field : "storeId",
-				width : 170,
-				align : "center",
-				sortable : true,
-				formatter : function(value, rowData) {
-					return rowData.storeName;
-				}
-			}, {
 				title : "用户身份",
 				field : "identity",
 				width : 200,

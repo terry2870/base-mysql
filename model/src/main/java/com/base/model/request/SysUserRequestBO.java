@@ -30,9 +30,7 @@ public class SysUserRequestBO extends BaseBean {
 	private String email;
 
 	private Byte status;
-	
-	private Integer storeId;
-	
+		
 	private Byte identity;
 
 	public Integer getUserId() {
@@ -105,14 +103,6 @@ public class SysUserRequestBO extends BaseBean {
 
 	public void setStatus(Byte status) {
 		this.status = status;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
 	}
 
 	public Byte getIdentity() {
