@@ -10,7 +10,7 @@
 	</parent>
 	<artifactId>base-mysql-web</artifactId>
 	<packaging>war</packaging>
-	<name>web Maven Webapp</name>
+	<name>base-mysql-web</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>

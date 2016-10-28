@@ -1,30 +1,17 @@
-<%@page import="com.baseProjectMysql.enums.ReturnCodeEnum"%>
-<%@page import="com.baseProjectMysql.enums.RegionTypeEnum"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="t" uri="/my-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <form name="regionEditForm" id="regionEditForm" method="post">
 	<input type="hidden" name="parentRegionId" id="parentRegionId" value="<t:write name='parentRegionId' />" />
 	<input type="hidden" name="regionId" id="regionId" value="<t:write name='regionId' />" />
-	<table cellpadding="0" cellspacing="0" border="0" width="80%" style="margin-top:10px">
+	<table class="table_style" align="center">
 		<tr>
 			<td width="30%" align="right">地区名称：</td>
 			<td width="70%">
-				<input type="text" name="regionName" id="regionName" class="easyui-validatebox" data-options="
+				<input type="text" name="regionName" id="regionName" class="easyui-textbox" data-options="
 					required:true,
 					validType : 'checkName',
 					invalidMessage : '请输入正确的地区名，地区名不能输入形如（@#$）等特殊字符'
-				" />
-			</td>
-		</tr>
-		<tr>
-			<td align="right">地区类型：</td>
-			<td>
-				<input name="regionType" id="regionType" class="easyui-combobox" data-options="
-					url : '<t:path />/jsp/noFilter.do?method=queryEnumForSelect&className=RegionTypeEnum',
-					readonly : true,
-					editable : false,
-					required:true
 				" />
 			</td>
 		</tr>
@@ -36,13 +23,7 @@
 		</tr>
 		<tr style="padding-top:20px">
 			<td align="center" colspan="2" id="buttons">
-				<a id="addProvinceMenu" class="easyui-linkbutton" data-options="iconCls:'icon-add'" href="#" onclick="addRegion('<%=RegionTypeEnum.PROVINCE.toString()%>');">增加省份</a>
-				<a id="addCityMenu" class="easyui-linkbutton" data-options="iconCls:'icon-add'" href="#" onclick="addRegion('<%=RegionTypeEnum.CITY.toString()%>');">增加地市</a>
-				<a id="addCity2Menu" class="easyui-linkbutton" data-options="iconCls:'icon-add'" href="#" onclick="addRegion('<%=RegionTypeEnum.CITY_2.toString()%>');">新增区/县</a>
-				<a id="addTowmButton" class="easyui-linkbutton" data-options="iconCls:'icon-add'" href="#" onclick="addRegion('<%=RegionTypeEnum.TOWN.toString()%>');">新增街道/乡镇</a>
-				<a id="addCountryButton" class="easyui-linkbutton" data-options="iconCls:'icon-add'" href="#" onclick="addRegion('<%=RegionTypeEnum.COUNTRY.toString()%>');">新增社区/村</a>
-				<a id="deleteRegion" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" href="#" onclick="delRegion();">删除节点</a>
-				<a id="saveRegion" class="easyui-linkbutton" data-options="iconCls:'icon-save'" href="#" onclick="saveRegion();">保存</a>
+				<a id="saveRegion"></a>
 			</td>
 		</tr>
 	</table>
@@ -51,31 +32,19 @@
 	$(function() {
 		$("#regionEditForm").form("load", {
 			regionName : "<t:write name='regionName' />",
-			regionType : "<t:write name='regionType' />",
 			sortNumber : "<t:write name='sortNumber' />"
 		});
-		var regionType = "<t:write name='regionType' />";
 		var regionId = "<t:write name='regionId' defaultValue='0' />";
-		if (!regionType) {
-			$("#saveRegion").hide();
-		}
-		if (regionId == 0) {
-			$("#addCityMenu,#addCity2Menu,#addTowmButton,#addCountryButton,#addRegionButton,#deleteRegion").hide();
-		}
-		//$("#addCityMenu").hide();
-		if (regionType == "<%=RegionTypeEnum.PROVINCE.toString()%>") {
-			$("#addCity2Menu,#addTowmButton,#addCountryButton").hide();
-		} else if (regionType == "<%=RegionTypeEnum.CITY.toString()%>") {
-			$("#addCityMenu,#addTowmButton,#addCountryButton").hide();
-		} else if (regionType == "<%=RegionTypeEnum.CITY_2.toString()%>") {
-			$("#addCityMenu,#addCity2Menu,#addCountryButton").hide();
-		} else if (regionType == "<%=RegionTypeEnum.TOWN.toString()%>") {
-			$("#addCityMenu,#addCity2Menu,#addTowmButton").hide();
-		} else if (regionType == "<%=RegionTypeEnum.COUNTRY.toString()%>") {
-			$("#addCityMenu,#addCity2Menu,#addTowmButton,#addCountryButton").hide();
-		}
+		
+		$("#saveRegion").linkbutton({
+			text : "保存",
+			iconCls : "icon-save",
+			onClick : function() {
+				
+			}
+		});
 	});
-	function addRegion(regionType) {
+	<%-- function addRegion(regionType) {
 		var treeNode = $("#regionLeft").myTree("getSelected");
 		var data = {
 			regionId : 0,
@@ -155,7 +124,7 @@
 				}
 			}
 		});
-	};
+	}; --%>
 </script>
 
 

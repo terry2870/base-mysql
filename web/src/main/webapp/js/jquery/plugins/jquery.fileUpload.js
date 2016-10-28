@@ -189,7 +189,7 @@
 	
 	function _getValue(jq) {
 		var obj = jq.find("input[type='file']");
-		if (!obj) {
+		if (!obj || obj.length == 0) {
 			obj = jq.find("input[type='hidden']");
 		}
 		return obj.val();
