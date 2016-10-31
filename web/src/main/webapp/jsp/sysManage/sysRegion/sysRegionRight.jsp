@@ -40,7 +40,33 @@
 			text : "保存",
 			iconCls : "icon-save",
 			onClick : function() {
-				
+				$("#regionEditForm").form("submit", {
+					url : "<t:path />/SysRegionController/saveSysRegion.do",
+					onSubmit : function() {
+						if (!$("#regionEditForm").form("validate")) {
+							return false;
+						}
+						window.top.$.messager.progress({
+							title : "正在执行",
+							msg : "正在执行，请稍后..."
+						});
+						return true;
+					},
+					success : function(data) {
+						data = JSON.parse(data);
+						window.top.$.messager.progress("close");
+						if (!data || data.code != CODE_SUCCESS) {
+							window.top.$.messager.alert("出错", data.message, "error");
+							return;
+						}
+						$("#regionLeft").myTree("reload");
+						$.messager.show({
+							title : "提示",
+							msg : "保存成功！"
+						});
+						$("#regionEditForm").form("clear");
+					}
+				});
 			}
 		});
 	});

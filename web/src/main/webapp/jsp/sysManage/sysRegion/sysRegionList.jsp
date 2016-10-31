@@ -36,7 +36,7 @@
 			textField : "regionName",
 			rootPid : 0,
 			onClick : function(node) {
-				//$("#regionRight").panel("refresh", "<t:path />/jsp/sysManage/sysRegion/sysRegionRight.jsp?" + $.param(node.attributes, true));
+				$("#regionRight").panel("refresh", "<t:path />/jsp/sysManage/sysRegion/sysRegionRight.jsp?" + $.param(node.attributes, true));
 			},
 			onContextMenu : function(e, node) {
 				e.preventDefault();
@@ -53,7 +53,41 @@
 				var node = $("#regionLeft").tree("getSelected");
 				var data = node.attributes;
 				if (item.role === "addRoot") {
-					
+					data = {
+						parentRegionId : 0
+					};
+					$("#regionRight").panel("refresh", "<t:path />/jsp/sysManage/sysRegion/sysRegionRight.jsp?" + $.param(data, true));
+				} else if (item.role === "addChild") {
+					data = {
+						parentRegionId : data.regionId
+					};
+					$("#regionRight").panel("refresh", "<t:path />/jsp/sysManage/sysRegion/sysRegionRight.jsp?" + $.param(data, true));
+				} else if (item.role === "edit") {
+					$("#regionRight").panel("refresh", "<t:path />/jsp/sysManage/sysRegion/sysRegionRight.jsp?" + $.param(data, true));
+				} else if (item.role === "del") {
+					window.top.$.messager.confirm("确认", "您确定要删除该地区吗？", function(flag) {
+						if (flag) {
+							window.top.$.messager.progress({
+								title : "正在执行",
+								msg : "正在执行，请稍后..."
+							});
+							$.post("<t:path/>/SysRegionController/deleteSysregion.do", {
+								regionId : data.regionId
+							}, function(json) {
+								window.top.$.messager.progress("close");
+								if (!json || json.code != CODE_SUCCESS) {
+									window.top.$.messager.alert("删除地区失败", json.message, "error");
+									return;
+								}
+								$("#regionLeft").myTree("reload");
+								$.messager.show({
+									title : "提示",
+									msg : "删除地区成功！"
+								});
+								$("#regionEditForm").form("clear");
+							});
+						}
+					});
 				}
 			}
 		});

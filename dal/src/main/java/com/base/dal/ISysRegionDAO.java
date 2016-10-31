@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.base.dal.model.SysRegion;
 
 public interface ISysRegionDAO {
-	int deleteByPrimaryKey(Integer regionId);
+	int deleteByPrimaryKey(@Param("regionId") Integer regionId);
 
 	int insert(SysRegion record);
 

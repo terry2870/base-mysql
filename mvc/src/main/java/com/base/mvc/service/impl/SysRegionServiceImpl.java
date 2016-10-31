@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.base.common.convert.SysRegionConvert;
 import com.base.common.enums.ActionTypeEnum;
+import com.base.common.utils.ResponseUtil;
 import com.base.common.utils.SessionUtil;
 import com.base.dal.ISysRegionDAO;
 import com.base.dal.model.SysRegion;
@@ -88,9 +89,11 @@ public class SysRegionServiceImpl implements ISysRegionService {
 		SysRegion region = SysRegionConvert.bo2DalRequest(request);
 		if (region.getRegionId() == null || region.getRegionId() == 0) {
 			SessionUtil.getOperater().setOperaType(ActionTypeEnum.ADD.getValue());
+			ResponseUtil.setAddBaseData(region);
 			sysRegionDAO.insert(region);
 		} else {
 			SessionUtil.getOperater().setOperaType(ActionTypeEnum.MODIFY.getValue());
+			ResponseUtil.setUpdateBaseData(region);
 			sysRegionDAO.updateByPrimaryKey(region);
 		}
 		log.info("saveSysRegion success. with request={}", request);

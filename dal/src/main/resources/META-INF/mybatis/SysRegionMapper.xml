@@ -21,7 +21,7 @@
 		where region_id = #{regionId,jdbcType=INTEGER}
 	</select>
 	<select id="queryRegionInfoByParentRegionId" resultMap="BaseResultMap">
-		select * from sys_region where parent_region_id={#parentRegionId} order by sort_number
+		select * from sys_region where parent_region_id=#{parentRegionId} order by sort_number
 	</select>
 	
 	<select id="queryAllRegion" resultMap="BaseResultMap">
