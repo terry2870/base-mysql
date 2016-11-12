@@ -84,6 +84,7 @@
 				if (opt.onAfterShow) {
 					opt.onAfterShow.call(self);
 				}
+				self.remoteAttr("tabindex");
 			});
 			self.on("hide.bs.modal", function(e) {
 				if (opt.onBeforeHide) {

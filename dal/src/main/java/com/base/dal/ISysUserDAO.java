@@ -59,4 +59,11 @@ public interface ISysUserDAO {
 	 * @return
 	 */
 	List<SysUser> selectByCreateUserId(Integer createUserId);
+	
+	/**
+	 * 根据userId批量查询用户
+	 * @param userIds
+	 * @return
+	 */
+	List<SysUser> selectByUserIds(@Param("userIds") String userIds);
 }
