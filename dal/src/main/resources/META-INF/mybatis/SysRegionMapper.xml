@@ -10,6 +10,7 @@
 		<result column="sort_number" property="sortNumber" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="TINYINT" />
 	</resultMap>
+
 	<sql id="Base_Column_List">
 		region_id, region_name, region_code, parent_region_id, sort_number, status
 	</sql>
@@ -26,6 +27,16 @@
 	
 	<select id="queryAllRegion" resultMap="BaseResultMap">
 		select * from sys_region where status=1 order by sort_number
+	</select>
+	
+	<!-- 根据镇id，递归查询省市县 -->
+	<select id="selectRegionByTownIdRecursion" resultType="com.base.dal.model.RegionInfos">
+		select t1.region_id townId, t1.region_name townName, t2.region_id countyId, t2.region_name countyName, t3.region_id cityId, t3.region_name cityName, t4.region_id provinceId, t4.region_name provinceName
+		from sys_region t1 
+		left join sys_region t2 on t1.parent_region_id=t2.region_id
+		left join sys_region t3 on t2.parent_region_id=t3.region_id
+		left join sys_region t4 on t3.parent_region_id=t4.region_id
+		where t1.region_id in (${regionIds}) and t1.status=1 and t2.status=1 and t3.status=1 and t4.status=1
 	</select>
 	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

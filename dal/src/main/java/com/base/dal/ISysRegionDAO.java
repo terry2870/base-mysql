@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.base.dal.model.RegionInfos;
 import com.base.dal.model.SysRegion;
 
 public interface ISysRegionDAO {
@@ -20,4 +21,6 @@ public interface ISysRegionDAO {
 	List<SysRegion> queryRegionInfoByParentRegionId(@Param("parentRegionId") int parentRegionId);
 	
 	List<SysRegion> queryAllRegion();
+	
+	List<RegionInfos> selectRegionByTownIdRecursion(@Param("regionIds") String regionIds);
 }
