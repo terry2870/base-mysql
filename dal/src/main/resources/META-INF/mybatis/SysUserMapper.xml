@@ -151,7 +151,8 @@
 		address = #{address,jdbcType=VARCHAR},
 		email = #{email,jdbcType=VARCHAR},
 		status = #{status,jdbcType=TINYINT},
-		update_time = #{updateTime,jdbcType=INTEGER}
+		update_time = #{updateTime,jdbcType=INTEGER},
+		identity = #{identity}
 		where user_id = #{userId,jdbcType=INTEGER}
 	</update>
 </mapper>
