@@ -41,7 +41,7 @@ public class ResponseUtil {
 			int now = DateUtil.getCurrentTimeSeconds();
 			BeanUtils.setProperty(obj, "createTime", now);
 			BeanUtils.setProperty(obj, "updateTime", now);
-			BeanUtils.setProperty(obj, "createUserId", SessionUtil.getSessionUser().getUserId());
+			BeanUtils.setProperty(obj, "createUserId", SessionUtil.getSessionUser() == null ? 0 : SessionUtil.getSessionUser().getUserId());
 			if (BeanUtils.getProperty(obj, "status") == null) {
 				BeanUtils.setProperty(obj, "status", StatusEnum.OPEN.getValue());
 			}

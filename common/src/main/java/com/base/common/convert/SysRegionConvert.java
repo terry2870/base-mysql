@@ -43,6 +43,6 @@ public class SysRegionConvert {
 		}
 		SysRegionResponseBO bo = new SysRegionResponseBO();
 		BeanUtils.copyProperties(menu, bo);
-			return bo;
+		return bo;
 	}
 }

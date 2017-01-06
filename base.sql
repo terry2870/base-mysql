@@ -279,6 +279,22 @@ CREATE TABLE `sys_user_group_user` (
 -- Dumping data for table `sys_user_group_user`
 --
 
+CREATE TABLE `sys_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `config_key` varchar(50) DEFAULT NULL COMMENT '配置key',
+  `config_value` varchar(500) DEFAULT NULL COMMENT '配置值',
+  `status` tinyint(4) DEFAULT '1' COMMENT '状态',
+  `create_time` int(11) DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) DEFAULT '0' COMMENT '更新时间',
+  `config_desc` varchar(200) DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `IDX_config_key` (`config_key`),
+  KEY `IDX_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='配置表';
+
+
+
+
 LOCK TABLES `sys_user_group_user` WRITE;
 /*!40000 ALTER TABLE `sys_user_group_user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sys_user_group_user` ENABLE KEYS */;

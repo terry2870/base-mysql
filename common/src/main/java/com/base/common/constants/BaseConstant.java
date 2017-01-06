@@ -3,6 +3,11 @@
  */
 package com.base.common.constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.base.model.response.SysConfigResponseBO;
+
 /**
  * @author huangping
  * 2016年8月21日 下午11:26:04
@@ -23,5 +28,8 @@ public class BaseConstant {
     public static String projectRealPath = "";
     
     //public static final String IS_SUPER_USER = "isSuperUser";
+    
+    //系统配置变量的map
+    public static Map<String, SysConfigResponseBO> SYS_CONFIG_MAP = new HashMap<>();
 
 }

@@ -26,7 +26,8 @@ public class SessionUtil {
 	 * @return
 	 */
 	public static OperaBean getOperater() {
-		return UrlInterceptor.getOperater();
+		OperaBean opera = UrlInterceptor.getOperater();
+		return opera == null ? new OperaBean() : opera;
 	}
 	
 	/**
