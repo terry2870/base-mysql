@@ -4,7 +4,9 @@
 package com.base.model.echarts;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * @author huangping
@@ -15,7 +17,7 @@ public class Legend extends BaseEChartsBean {
 	private static final long serialVersionUID = 8890512241296245344L;
 	
 	private String x = "center";
-	private List<String> data = new ArrayList<>();
+	private Collection<String> data = new ArrayList<>();
 
 	/**
 	 * 
@@ -23,18 +25,27 @@ public class Legend extends BaseEChartsBean {
 	public Legend() {
 	}
 
+	public Legend(String... data) {
+		if (ArrayUtils.isNotEmpty(data)) {
+			for (String str : data) {
+				this.data.add(str);
+			}
+		}
+	}
+
+	
 	/**
 	 * @param data
 	 */
-	public Legend(List<String> data) {
+	public Legend(Collection<String> data) {
 		this.data = data;
 	}
 
-	public List<String> getData() {
+	public Collection<String> getData() {
 		return data;
 	}
 
-	public void setData(List<String> data) {
+	public void setData(Collection<String> data) {
 		this.data = data;
 	}
 

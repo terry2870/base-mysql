@@ -4,7 +4,9 @@
 package com.base.model.echarts;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.Lists;
 import com.hp.tools.common.beans.BaseBean;
@@ -13,57 +15,39 @@ import com.hp.tools.common.beans.BaseBean;
  * @author huangping
  * 2016年9月28日 下午11:52:46
  */
-public class Series extends BaseEChartsBean {
+public abstract class Series extends BaseEChartsBean {
 
 	private static final long serialVersionUID = -5276016747421148921L;
 
-	private String type;
+	
 	private String name;
-	private List<Object> data = new ArrayList<>();
+	private Collection<SeriesData> data = new ArrayList<>();
 	private MarkPoint markPoint = new MarkPoint();
 	private MarkLine markLine = new MarkLine();
 	
-	private int xAxisIndex;
-	private int yAxisIndex;
-	private String barGap = "30%";
-	private String barCategoryGap = "20%";
-	private int barMinHeight;
+
 	
 	public Series() {
 	}
-
-	/**
-	 * @param type
-	 * @param name
-	 * @param data
-	 * @param markPoint
-	 * @param markLine
-	 */
-	public Series(String type, String name, List<Object> data, MarkPoint markPoint, MarkLine markLine) {
-		this.type = type;
-		this.name = name;
+	
+	public Series(Collection<SeriesData> data) {
 		this.data = data;
+	}
+	public Series(Object... data) {
+		setData(data);
+	}
+	public Series(Collection<SeriesData> data, MarkPoint markPoint, MarkLine markLine) {
+		this(data);
 		this.markPoint = markPoint;
 		this.markLine = markLine;
 	}
 
-	/**
-	 * @param type
-	 * @param name
-	 * @param data
-	 */
-	public Series(String type, String name, List<Object> data) {
-		this.type = type;
-		this.name = name;
-		this.data = data;
-	}
 
 	public static class MarkPoint extends BaseBean {
 
 		private static final long serialVersionUID = -625196395506883418L;
 		
-		private boolean clickable = true;
-		private List<Data> data = Lists.newArrayList(new Data("min", "最小值"), new Data("max", "最大值"));
+		private Collection<SeriesData> data = Lists.newArrayList(new SeriesData("最小值", "min"), new SeriesData("最大值", "max"));
 		/**
 		 * 
 		 */
@@ -73,20 +57,13 @@ public class Series extends BaseEChartsBean {
 		 * @param clickable
 		 * @param data
 		 */
-		public MarkPoint(boolean clickable, List<Data> data) {
-			this.clickable = clickable;
+		public MarkPoint(Collection<SeriesData> data) {
 			this.data = data;
 		}
-		public boolean isClickable() {
-			return clickable;
-		}
-		public void setClickable(boolean clickable) {
-			this.clickable = clickable;
-		}
-		public List<Data> getData() {
+		public Collection<SeriesData> getData() {
 			return data;
 		}
-		public void setData(List<Data> data) {
+		public void setData(Collection<SeriesData> data) {
 			this.data = data;
 		}
 	}
@@ -95,54 +72,53 @@ public class Series extends BaseEChartsBean {
 
 		private static final long serialVersionUID = 1532640048492471819L;
 		
-		private boolean clickable = true;
-		private List<Data> data = Lists.newArrayList(new Data("average", "平均值"));
+		private Collection<SeriesData> data = Lists.newArrayList(new SeriesData("平均值", "average"));
 		/**
 		 * 
 		 */
 		public MarkLine() {
 		}
-		/**
-		 * @param clickable
-		 * @param data
-		 */
-		public MarkLine(boolean clickable, List<Data> data) {
-			this.clickable = clickable;
+
+		public MarkLine(Collection<SeriesData> data) {
 			this.data = data;
 		}
-		public boolean isClickable() {
-			return clickable;
-		}
-		public void setClickable(boolean clickable) {
-			this.clickable = clickable;
-		}
-		public List<Data> getData() {
+
+		public Collection<SeriesData> getData() {
 			return data;
 		}
-		public void setData(List<Data> data) {
+		public void setData(Collection<SeriesData> data) {
 			this.data = data;
 		}
 	}
 	
-	public static class Data extends BaseBean {
+	public static class SeriesData extends BaseBean {
 
 		private static final long serialVersionUID = 2096300328478104303L;
 		
 		private String type;
 		private String name;
+		private Object value;
 		/**
 		 * 
 		 */
-		public Data() {
+		public SeriesData() {
 		}
-		/**
-		 * @param type
-		 * @param name
-		 */
-		public Data(String type, String name) {
-			this.type = type;
+		public SeriesData(Object value) {
+			this.value = value;
+		}
+		public SeriesData(Object value, String name) {
+			this(value);
 			this.name = name;
 		}
+		public SeriesData(String name, String type) {
+			this.name = name;
+			this.type = type;
+		}
+		public SeriesData(Object value, String name, String type) {
+			this(value, name);
+			this.type = type;
+		}
+		
 		public String getType() {
 			return type;
 		}
@@ -155,15 +131,13 @@ public class Series extends BaseEChartsBean {
 		public void setName(String name) {
 			this.name = name;
 		}
+		public Object getValue() {
+			return value;
+		}
+		public void setValue(Object value) {
+			this.value = value;
+		}
 		
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getName() {
@@ -174,67 +148,51 @@ public class Series extends BaseEChartsBean {
 		this.name = name;
 	}
 
-	public List<Object> getData() {
+	public Collection<SeriesData> getData() {
 		return data;
 	}
 
-	public void setData(List<Object> data) {
+	public void setData(Collection<SeriesData> data) {
 		this.data = data;
+	}
+	
+	public Series addData(SeriesData... data) {
+		if (ArrayUtils.isNotEmpty(data)) {
+			for (SeriesData obj : data) {
+				this.data.add(obj);
+			}
+		}
+		return this;
+	}
+	
+	public Series addData(Object... data) {
+		if (ArrayUtils.isNotEmpty(data)) {
+			for (Object obj : data) {
+				this.data.add(new SeriesData(obj));
+			}
+		}
+		return this;
+	}
+	public Series setData(Object... data) {
+		this.data.clear();
+		return addData(data);
 	}
 
 	public MarkPoint getMarkPoint() {
 		return markPoint;
 	}
 
-	public void setMarkPoint(MarkPoint markPoint) {
+	public Series setMarkPoint(MarkPoint markPoint) {
 		this.markPoint = markPoint;
+		return this;
 	}
 
 	public MarkLine getMarkLine() {
 		return markLine;
 	}
 
-	public void setMarkLine(MarkLine markLine) {
+	public Series setMarkLine(MarkLine markLine) {
 		this.markLine = markLine;
-	}
-
-	public int getxAxisIndex() {
-		return xAxisIndex;
-	}
-
-	public void setxAxisIndex(int xAxisIndex) {
-		this.xAxisIndex = xAxisIndex;
-	}
-
-	public int getyAxisIndex() {
-		return yAxisIndex;
-	}
-
-	public void setyAxisIndex(int yAxisIndex) {
-		this.yAxisIndex = yAxisIndex;
-	}
-
-	public String getBarGap() {
-		return barGap;
-	}
-
-	public void setBarGap(String barGap) {
-		this.barGap = barGap;
-	}
-
-	public String getBarCategoryGap() {
-		return barCategoryGap;
-	}
-
-	public void setBarCategoryGap(String barCategoryGap) {
-		this.barCategoryGap = barCategoryGap;
-	}
-
-	public int getBarMinHeight() {
-		return barMinHeight;
-	}
-
-	public void setBarMinHeight(int barMinHeight) {
-		this.barMinHeight = barMinHeight;
+		return this;
 	}
 }

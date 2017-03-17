@@ -4,11 +4,13 @@
 package com.base.model.echarts;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.base.model.echarts.Axis.AxisLabel;
 import com.google.common.collect.Lists;
 import com.hp.tools.common.beans.BaseBean;
-import com.base.model.echarts.Axis.AxisLabel;
 
 /**
  * @author huangping 2016年9月27日 下午11:44:53
@@ -18,7 +20,7 @@ public class EChartsResponseBO extends BaseBean {
 	private static final long serialVersionUID = -7524336888849955306L;
 
 	public static void main(String[] args) {
-		EChartsResponseBO bo = new EChartsResponseBO();
+		/*EChartsResponseBO bo = new EChartsResponseBO();
 		bo.setTitle(new Title("温度变化", "试试看啊"));
 		//bo.setTooltip(new Tooltip());
 		bo.setLegend(new Legend(Lists.newArrayList("最高气温", "最低气温")));
@@ -26,7 +28,7 @@ public class EChartsResponseBO extends BaseBean {
 		bo.setyAxis(Lists.newArrayList(new Axis("value", new AxisLabel("{value} °C"))));
 		
 		bo.setSeries(Lists.newArrayList(new Series("line", "最高气温", Lists.newArrayList(11, 11, 15, 13, 12, 13, 10)), new Series("line", "最低气温", Lists.newArrayList(1, -2, 2, 5, 3, 2, 0))));
-		System.out.println(bo.toString());
+		System.out.println(bo.toString());*/
 	}
 	
 	
@@ -34,9 +36,9 @@ public class EChartsResponseBO extends BaseBean {
 	private Tooltip tooltip = new Tooltip();
 	private Legend legend = new Legend();
 	private Toolbox toolbox = new Toolbox();
-	private List<Axis> xAxis = new ArrayList<>();
-	private List<Axis> yAxis = new ArrayList<>();
-	private List<Series> series = new ArrayList<>();
+	private Collection<Axis> xAxis = Lists.newArrayList(new Axis());
+	private Collection<Axis> yAxis = Lists.newArrayList(new Axis("value", new AxisLabel()));
+	private Collection<Series> series = new ArrayList<>();
 	public Title getTitle() {
 		return title;
 	}
@@ -61,24 +63,37 @@ public class EChartsResponseBO extends BaseBean {
 	public void setToolbox(Toolbox toolbox) {
 		this.toolbox = toolbox;
 	}
-	public List<Axis> getxAxis() {
+	public Collection<Axis> getxAxis() {
 		return xAxis;
 	}
-	public void setxAxis(List<Axis> xAxis) {
+	public void setxAxis(Collection<Axis> xAxis) {
 		this.xAxis = xAxis;
 	}
-	public List<Axis> getyAxis() {
+	public void setxAxis(Axis xAxis) {
+		this.xAxis = Lists.newArrayList(xAxis);
+	}
+	public Collection<Axis> getyAxis() {
 		return yAxis;
 	}
-	public void setyAxis(List<Axis> yAxis) {
+	public void setyAxis(Collection<Axis> yAxis) {
 		this.yAxis = yAxis;
 	}
-	public List<Series> getSeries() {
+	public void setyAxis(Axis yAxis) {
+		this.yAxis = Lists.newArrayList(yAxis);
+	}
+	public Collection<Series> getSeries() {
 		return series;
 	}
-	public void setSeries(List<Series> series) {
+	public void setSeries(Collection<Series> series) {
 		this.series = series;
 	}
-	
+	public void setSeries(Series... series) {
+		this.series.clear();
+		if (ArrayUtils.isNotEmpty(series)) {
+			for (Series s : series) {
+				this.series.add(s);
+			}
+		}
+	}
 
 }

@@ -14,6 +14,7 @@ public class Title extends BaseEChartsBean {
 	private String x = "left";
 	private String text; // 主标题
 	private String subtext; // 副标题
+	private String textAlign; //标题文本水平对齐
 
 	/**
 	 * 
@@ -28,6 +29,11 @@ public class Title extends BaseEChartsBean {
 	public Title(String text, String subtext) {
 		this.text = text;
 		this.subtext = subtext;
+	}
+	
+	public Title(String text, String subtext, String textAlign) {
+		this(text, subtext);
+		this.textAlign = textAlign;
 	}
 
 	public String getText() {
@@ -52,5 +58,13 @@ public class Title extends BaseEChartsBean {
 
 	public void setX(String x) {
 		this.x = x;
+	}
+
+	public String getTextAlign() {
+		return textAlign;
+	}
+
+	public void setTextAlign(String textAlign) {
+		this.textAlign = textAlign;
 	}
 }
