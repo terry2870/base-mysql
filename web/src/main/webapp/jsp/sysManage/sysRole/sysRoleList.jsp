@@ -23,8 +23,8 @@
 		var data = roleId === 0 ? {roleId:0} : $("#sysRoleListTable").myDatagrid("getRowDataByIndex", index);
 		var title = data.roleId === 0 ? "新增角色数据" : "修改角色数据";
 		window.top.$(div).myDialog({
-			width : "40%",
-			height : "40%",
+			width : 500,
+			height : 350,
 			title : title,
 			href : "<t:path />/jsp/sysManage/sysRole/sysRoleEdit.jsp",
 			method : "post",
@@ -84,8 +84,8 @@
 		var data = $("#sysRoleListTable").myDatagrid("getRowDataByIndex", index);
 		var div = $("<div>").appendTo($(window.top.document.body));
 		window.top.$(div).myDialog({
-			width : "40%",
-			height : "40%",
+			width : 500,
+			height : 350,
 			title : "角色数据详细",
 			href : "<t:path />/jsp/sysManage/sysRole/sysRoleEdit.jsp",
 			method : "post",

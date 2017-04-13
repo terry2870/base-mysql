@@ -25,6 +25,7 @@
 				}
 			});
 			$(self).tabs(opt);
+			$(self).loadSuccess(opt);
 			
 			var menu = $("<div>");
 			menu.menu({

@@ -12,7 +12,7 @@
 			if (method){
 				return method.call(this, param);
 			} else {
-				return this.form(options, param);
+				return this.datebox(options, param);
 			}
 		}
 		return this.each(function() {

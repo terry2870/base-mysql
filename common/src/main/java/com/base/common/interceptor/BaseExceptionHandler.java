@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 import com.base.common.enums.CodeEnum;
-import com.base.common.exceptions.CommonException;
 import com.base.common.exceptions.NoRightException;
+import com.hp.tools.common.exceptions.CommonException;
 
 /**
  * @author huangping 2016年8月24日 上午1:02:17
@@ -35,20 +35,20 @@ public class BaseExceptionHandler implements HandlerExceptionResolver {
 		}
 		// 数据库超时异常，特殊处理
 		if (exception instanceof QueryTimeoutException) {
-			// response.setStatus(CodeEnum.DATABASE_TIME_OUT.getCode());
+			response.setStatus(CodeEnum.DATABASE_TIME_OUT.getCode());
 			return getErrorJsonView(CodeEnum.DATABASE_TIME_OUT.getCode(), CodeEnum.DATABASE_TIME_OUT.getMessage());
 		}
 		if (exception instanceof NoRightException) {
 			NoRightException e = (NoRightException) exception;
-			// response.setStatus(e.getCode());
+			response.setStatus(e.getCode());
 			return getErrorJsonView(e.getCode(), e.getMessage());
 		}
 		if (exception instanceof CommonException) {
 			CommonException commonException = (CommonException) exception;
-//			response.setStatus(commonException.getCode());
+			response.setStatus(commonException.getCode());
 			return getErrorJsonView(commonException.getCode(), commonException.getMessage());
 		}
-		// response.setStatus(CodeEnum.ERROR.getCode());
+		response.setStatus(CodeEnum.ERROR.getCode());
 		return getErrorJsonView(CodeEnum.ERROR.getCode(), exception.getMessage());
 	}
 

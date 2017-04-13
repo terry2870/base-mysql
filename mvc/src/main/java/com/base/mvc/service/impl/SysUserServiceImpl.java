@@ -11,13 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.beans.page.PageModel;
-import com.hp.tools.common.beans.page.PageRequest;
-import com.hp.tools.common.beans.page.PageResponse;
-import com.hp.tools.common.enums.StatusEnum;
-import com.hp.tools.common.utils.DateUtil;
-import com.hp.tools.common.utils.MD5Util;
 import com.base.common.convert.SysUserConvert;
 import com.base.common.enums.ActionTypeEnum;
 import com.base.common.helper.BaseResponseHelper;
@@ -31,6 +24,14 @@ import com.base.model.response.SysUserResponseBO;
 import com.base.model.response.SysUserRoleResponseBO;
 import com.base.mvc.service.ISysUserRoleService;
 import com.base.mvc.service.ISysUserService;
+import com.hp.tools.common.beans.Response;
+import com.hp.tools.common.beans.page.PageModel;
+import com.hp.tools.common.beans.page.PageRequest;
+import com.hp.tools.common.beans.page.PageResponse;
+import com.hp.tools.common.enums.StatusEnum;
+import com.hp.tools.common.exceptions.CommonException;
+import com.hp.tools.common.utils.DateUtil;
+import com.hp.tools.common.utils.MD5Util;
 
 /**
  * 用户接口实现
@@ -194,6 +195,14 @@ public class SysUserServiceImpl implements ISysUserService {
 		baseResponseHelper.convert(respList);
 		log.info("queryAllUser success. with request={}", request);
 		return new PageResponse<>(total, respList);
+	}
+	
+	@Override
+	public SysUserResponseBO getSysUseById(int userId) throws CommonException {
+		log.info("getSysUseById with userId={}", userId);
+		SysUser user = sysUserDAO.selectByPrimaryKey(userId);
+		log.info("getSysUseById with userId={}, user={}", userId, user);
+		return SysUserConvert.db2BOResponse(user);
 	}
 
 }

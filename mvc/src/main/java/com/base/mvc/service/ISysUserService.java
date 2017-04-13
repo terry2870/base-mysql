@@ -1,10 +1,11 @@
 package com.base.mvc.service;
 
+import com.base.model.request.SysUserRequestBO;
+import com.base.model.response.SysUserResponseBO;
 import com.hp.tools.common.beans.Response;
 import com.hp.tools.common.beans.page.PageRequest;
 import com.hp.tools.common.beans.page.PageResponse;
-import com.base.model.request.SysUserRequestBO;
-import com.base.model.response.SysUserResponseBO;
+import com.hp.tools.common.exceptions.CommonException;
 
 /**
  * 用户接口定义
@@ -53,5 +54,13 @@ public interface ISysUserService {
 	 * @throws Exception
 	 */
 	public PageResponse<SysUserResponseBO> queryAllUser(SysUserRequestBO request, PageRequest pageRequest) throws Exception;
+	
+	/**
+	 * 根据用户id，查询用户信息
+	 * @param userId
+	 * @return
+	 * @throws CommonException
+	 */
+	public SysUserResponseBO getSysUseById(int userId) throws CommonException;
 }
 

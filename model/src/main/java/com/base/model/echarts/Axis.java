@@ -67,11 +67,6 @@ public class Axis extends BaseEChartsBean {
 	public Collection<AxisData> getData() {
 		return data;
 	}
-
-	public Axis setData(Collection<AxisData> data) {
-		this.data = data;
-		return this;
-	}
 	
 	public Axis setData(AxisData... data) {
 		this.data.clear();

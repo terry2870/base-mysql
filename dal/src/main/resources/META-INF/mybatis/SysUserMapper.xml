@@ -35,7 +35,7 @@
 		<if test="user.identity != null and user.identity != 0">
 			and user.identity=#{user.identity}
 		</if>
-		<if test="user.status != null and user.status != 0">
+		<if test="user.status != null and user.status != -1">
 			and user.status=#{user.status}
 		</if>
 		<if test="opera.normalUser == true">

@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.hp.tools.common.beans.Response;
 import com.base.common.convert.SysMenuConvert;
 import com.base.common.enums.ActionTypeEnum;
 import com.base.common.utils.ResponseUtil;
@@ -24,6 +23,8 @@ import com.base.model.request.SysMenuRequestBO;
 import com.base.model.response.SysMenuResponseBO;
 import com.base.model.response.SysUserResponseBO;
 import com.base.mvc.service.ISysMenuService;
+import com.hp.tools.common.beans.Response;
+import com.hp.tools.common.exceptions.CommonException;
 
 /**
  * @author huangping
@@ -107,6 +108,14 @@ public class SysMenuServiceImpl implements ISysMenuService {
 		sysMenuDAO.deleteByPrimaryKey(menuId);
 		log.info("deleteSysMenu success with menuId={}", menuId);
 		return new Response<>();
+	}
+	
+	@Override
+	public SysMenuResponseBO getSysMenuById(int menuId) throws CommonException {
+		log.info("getSysMenuById menuId={}", menuId);
+		SysMenu menu = sysMenuDAO.selectByPrimaryKey(menuId);
+		log.info("getSysMenuById menuId={}, menu={}", menuId, menu);
+		return SysMenuConvert.db2BOResponse(menu);
 	}
 
 }

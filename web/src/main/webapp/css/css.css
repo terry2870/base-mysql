@@ -40,8 +40,14 @@ html,body{
 
 .table_style {
 	width : 90%;
-	margin-top : 20px;
 	border-spacing:10px;
+	margin:20px auto 0 auto;
+}
+.table_input {
+	height:30px;
+}
+.table_form {
+	text-align: center;
 }
 
 .table_linkbtn {

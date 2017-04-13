@@ -8,74 +8,21 @@ $.ajaxSetup({
 	type : "POST",
 	complete : function(XMLHttpRequest, textStatus) {
 		var status = XMLHttpRequest.status;
-		var dialog = $("<div>").appendTo($(window.top.document.body));
 		if (status != 200) {
 			if (status == 900) {
 				//数据库超时
 				//$.messageAlert("错误", "查询超时了");
-				window.top.$(dialog).myDialog({
-					modal : true,
-					width : 200,
-					height : 150,
-					title : "错误",
-					content : "查询超时了！",
-					buttons : [{
-						text : "关闭",
-						iconCls : "icon-no",
-						handler : function() {
-							window.top.$(dialog).myDialog("destroy");
-						}
-					}]
-				});
+				window.top.$.messager.alert("失败", "查询超时了！", "error");
 			} else if (status == 901) {
 				//session超时
-				window.top.$(dialog).myDialog({
-					modal : true,
-					width : 200,
-					height : 150,
-					title : "错误",
-					content : "登录超时了！",
-					buttons : [{
-						text : "重新登录",
-						iconCls : "icon-no",
-						handler : function() {
-							window.top.location.href = contextPath;
-						}
-					}]
+				window.top.$.messager.alert("失败", "登录超时了！", "error", function() {
+					window.top.location.href = contextPath;
 				});
-			} else if (status == 902) {
+			} else {
 				//没有权限
 				var text = XMLHttpRequest.responseText;
 				text = JSON.parse(text);
-				window.top.$(dialog).myDialog({
-					modal : true,
-					width : 500,
-					height : 250,
-					title : "错误",
-					content : text.message,
-					buttons : [{
-						text : "关闭",
-						iconCls : "icon-no",
-						handler : function() {
-							window.top.$(dialog).myDialog("destroy");
-						}
-					}]
-				});
-			} else {
-				window.top.$(dialog).myDialog({
-					modal : true,
-					width : 200,
-					height : 150,
-					title : "错误",
-					content : "操作失败了！",
-					buttons : [{
-						text : "关闭",
-						iconCls : "icon-no",
-						handler : function() {
-							window.top.$(dialog).myDialog("destroy");
-						}
-					}]
-				});
+				window.top.$.messager.alert("失败", text.message, "error");
 			}
 		} else {
 			var data = XMLHttpRequest.responseJSON;
@@ -86,20 +33,7 @@ $.ajaxSetup({
 				return;
 			}
 			if (data.code != 200) {
-				/*window.top.$(dialog).myDialog({
-					modal : true,
-					width : 200,
-					height : 150,
-					title : "错误",
-					content : data.message,
-					buttons : [{
-						text : "关闭",
-						iconCls : "icon-no",
-						handler : function() {
-							window.top.$(dialog).myDialog("destroy");
-						}
-					}]
-				});*/
+
 			}
 		}
 	}
@@ -107,9 +41,16 @@ $.ajaxSetup({
 
 //通用的LoadFilter
 function defaultLoadFilter(data) {
-	if (!data || data.code != 200) {
+	if ($.type(data) == "array") {
+		return data;
+	}
+	if (!data) {
 		return [];
 	}
-	return data.data;
+	if (data.code) {
+		return data.data || [];
+	} else {
+		return data || [];
+	}
 }
 

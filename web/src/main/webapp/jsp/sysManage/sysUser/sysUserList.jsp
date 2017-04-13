@@ -9,7 +9,7 @@
 <jsp:include page="/jsp/common/include.jsp" flush="true" />
 </head>
 <body class="easyui-layout" fit="true">
-	<div region="north" title="查询条件"id="userSearchDiv" style="height:70px;border-style: none">
+	<div region="north" title="查询条件"id="userSearchDiv" style="height:70px;border-style: none;overflow: hidden;">
 		<jsp:include page="/jsp/sysManage/sysUser/sysUserSearch.jsp" flush="true" />
 	</div>
 	<div region="center" id="userListDiv">
@@ -23,8 +23,8 @@
 		var div = $("<div>").appendTo($(window.top.document.body));
 		var title = data.userId === 0 ? "新增用户" : "修改用户";
 		window.top.$(div).myDialog({
-			width : "40%",
-			height : "80%",
+			width : 500,
+			height : 670,
 			title : title,
 			href : "<t:path />/jsp/sysManage/sysUser/sysUserEdit.jsp",
 			method : "post",
@@ -86,8 +86,8 @@
 		var data = $("#userListTable").myDatagrid("getRowDataByIndex", index);
 		var div = $("<div>").appendTo($(window.top.document.body));
 		window.top.$(div).myDialog({
-			width : "60%",
-			height : "60%",
+			width : 500,
+			height : 670,
 			title : "用户详细",
 			href : "<t:path />/jsp/sysManage/sysUser/sysUserEdit.jsp",
 			method : "post",

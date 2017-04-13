@@ -21,7 +21,6 @@
 <script src="<t:path/>/js/jquery/plugins/jquery.radioList.js"></script>
 <script src="<t:path/>/js/jquery/plugins/jquery.fileUpload.js"></script>
 <script src="<t:path/>/js/jquery/plugins/jquery.imageUpload.js"></script>
-<script src="<t:path/>/js/jquery/plugins/jquery.jqForm.js"></script>
 <script src="<t:path/>/js/global.js"></script>
 <script src="<t:path/>/js/right.js"></script>
 <link rel="stylesheet" type="text/css" href="<t:path/>/js/jquery/easyui/themes/default/easyui.css" />
@@ -33,5 +32,4 @@
 
 <link rel="stylesheet" type="text/css" href="<t:path />/css/style.css" />
 <link rel="stylesheet" type="text/css" href="<t:path />/css/css.css" />
-<%-- <link rel="stylesheet" type="text/css" href="<t:path />/css/bootstrap.css" /> --%>
 <link rel="stylesheet" type="text/css" href="<t:path />/js/jquery/easyui/myPlugins/css/easyui-extend.css" />

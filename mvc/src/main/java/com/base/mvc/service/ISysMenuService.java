@@ -2,9 +2,10 @@ package com.base.mvc.service;
 
 import java.util.List;
 
-import com.hp.tools.common.beans.Response;
 import com.base.model.request.SysMenuRequestBO;
 import com.base.model.response.SysMenuResponseBO;
+import com.hp.tools.common.beans.Response;
+import com.hp.tools.common.exceptions.CommonException;
 
 /**
  * @author huangping
@@ -34,6 +35,14 @@ public interface ISysMenuService {
 	 * @throws Exception
 	 */
 	public Response<?> deleteSysMenu(int menuId) throws Exception;
+	
+	/**
+	 * 根据id，查询菜单
+	 * @param menuId
+	 * @return
+	 * @throws CommonException
+	 */
+	public SysMenuResponseBO getSysMenuById(int menuId) throws CommonException;
 	
 }
 

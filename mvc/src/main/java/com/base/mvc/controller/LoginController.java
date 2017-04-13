@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hp.tools.common.beans.Response;
+import com.hp.tools.common.exceptions.CommonException;
 import com.base.common.constants.BaseConstant;
 import com.base.common.enums.IdentityEnum;
 import com.base.common.interceptor.UrlInterceptor;
@@ -88,6 +89,18 @@ public class LoginController {
 		
 		log.info("login success with request={}, checkCode={}", request, checkCode);
 		return response;
+	}
+	
+	/**
+	 * 获取登录的用户信息
+	 * @return
+	 * @throws CommonException
+	 */
+	@RequestMapping("/getUserInfo.do")
+	@ResponseBody
+	public Response<SysUserResponseBO> getUserInfo(HttpSession session) throws CommonException {
+		SysUserResponseBO bo = (SysUserResponseBO) session.getAttribute(BaseConstant.USER_SESSION);
+		return new Response<>(bo);
 	}
 
 

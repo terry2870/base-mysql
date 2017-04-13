@@ -3,6 +3,12 @@
  */
 package com.base.common.utils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import com.base.common.interceptor.UrlInterceptor;
 import com.base.model.OperaBean;
 import com.base.model.response.SysUserResponseBO;
@@ -36,5 +42,21 @@ public class SessionUtil {
 	 */
 	public static SysUserResponseBO getSessionUser() {
 		return getOperater().getUser();
+	}
+	
+	/**
+	 * 获取request
+	 * @return
+	 */
+	public static HttpServletRequest getRequest() {
+		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+	}
+	
+	/**
+	 * 获取response
+	 * @return
+	 */
+	public static HttpServletResponse getResponse() {
+		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
 	}
 }

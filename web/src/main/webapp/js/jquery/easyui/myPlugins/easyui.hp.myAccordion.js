@@ -69,6 +69,7 @@
 		}
 		$(self).removeData("accordion");
 		$(self).accordion(opt);
+		$(self).loadSuccess(opt);
 	}
 	/**
 	 * 查找子结点

@@ -31,7 +31,7 @@
 		var opt = jq.data("myCombobox");
 		var o = $.extend({}, opt, {
 			icons : [{
-				iconCls : "icon-no",
+				iconCls : "icon-clear",
 				handler : function(e) {
 					$(e.data.target).combobox("clear");
 				}

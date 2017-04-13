@@ -2,35 +2,46 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="t" uri="/my-tags"%>
 <!DOCTYPE html>
-<form name="sysRoleEditForm" id="sysRoleEditForm" method="post">
+<form name="sysRoleEditForm" id="sysRoleEditForm" method="post" class="table_form">
 	<input type="hidden" name="roleId" id="roleId" value="<t:write name='roleId' />" />
-	<table class="table_style" align="center">
-		<tr>
-			<td width="30%" align="right">角色名称：</td>
-			<td width="70%"><input name="roleName" id="roleName" value="<t:write name='roleName'/>" class="easyui-textbox" data-options="required:true,prompt:'角色名称',width:200" /></td>
-		</tr>
-		<tr>
-			<td align="right">角色描述：</td>
-			<td><input name="roleInfo" id="roleInfo" value="<t:write name='roleInfo'/>" class="easyui-textbox" data-options="prompt:'角色描述',width:200,multiline:true" /></td>
-		</tr>
-		<tr>
-			<td align="right">状态：</td>
-			<td>
-				<input name="status" id="status" />
-			</td>
-		</tr>
-	</table>
+	<div class="table_style">
+		<input name="roleName" id="roleName" value="<t:write name='roleName'/>" class="easyui-textbox" data-options="
+			required : true,
+			label : '角色名称：',
+			labelWidth : 100,
+			cls : 'table_input',
+			prompt : '角色名称',
+			width : 300
+		" />
+	</div>
+	<div class="table_style">
+		<input name="roleInfo" id="roleInfo" value="<t:write name='roleInfo'/>" class="easyui-textbox" data-options="
+			prompt : '角色描述',
+			label : '角色描述：',
+			labelWidth : 100,
+			width : 300,
+			height : 70,
+			multiline : true
+		" />
+	</div>
+	<div class="table_style">
+		<input name="status" id="status" />
+	</div>
 </form>
 <script>
 	$(function() {
 		
 		//状态
-		$("#sysRoleEditForm #status").myCombobox({
+		$("#sysRoleEditForm #status").combobox({
 			url : "<t:path/>/NoFilterController.do",
 			queryParams : {
 				method : 'getEnumForSelect',
 				className : 'com.hp.tools.common.enums.StatusEnum'
 			},
+			width : 300,
+			label : '状态：',
+			labelWidth : 100,
+			cls : 'table_input',
 			panelHeight : 100,
 			editable : false,
 			value : "<t:write name='status' defaultValue='<%=String.valueOf(StatusEnum.OPEN.getValue())%>' />",

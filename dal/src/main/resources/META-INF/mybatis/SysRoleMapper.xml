@@ -19,7 +19,7 @@
 		<if test="role.roleName != null and role.roleName != ''">
 			and instr(role.role_name, #{role.roleName}) &gt;0
 		</if>
-		<if test="role.status != null and role.status != 0">
+		<if test="role.status != null and role.status != -1">
 			and role.status=#{role.status}
 		</if>
 		<if test="opera.normalUser == true">

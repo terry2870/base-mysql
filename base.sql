@@ -348,17 +348,10 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'base'
 --
-/*!50003 DROP FUNCTION IF EXISTS `getChildUserById` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+DROP FUNCTION IF EXISTS `getChildUserById`;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`terry`@`%`*/ /*!50003 FUNCTION `getChildUserById`(rootId VARCHAR(100)) RETURNS varchar(1000) CHARSET utf8
+CREATE  FUNCTION `getChildUserById`(rootId VARCHAR(100)) RETURNS varchar(1000) CHARSET utf8
+    READS SQL DATA
     COMMENT '递归查询所有子用户'
 BEGIN
 
@@ -380,23 +373,17 @@ BEGIN
 
     RETURN sTemp;
 
-  END */;;
+  END
+;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP FUNCTION IF EXISTS `getParentsMenuIdByMenuId` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+
+-- ----------------------------
+-- Function structure for `getParentsMenuIdByMenuId`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getParentsMenuIdByMenuId`;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`terry`@`%`*/ /*!50003 FUNCTION `getParentsMenuIdByMenuId`(rootId VARCHAR(5000)) RETURNS varchar(5000) CHARSET utf8
+CREATE  FUNCTION `getParentsMenuIdByMenuId`(rootId VARCHAR(5000)) RETURNS varchar(5000) CHARSET utf8
+    READS SQL DATA
     COMMENT '向上递归查询所有父菜单节点'
 BEGIN
 
@@ -418,23 +405,17 @@ BEGIN
 
     RETURN sTemp;
 
-  END */;;
+  END
+;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP FUNCTION IF EXISTS `getParentsRegionIdByRegionId` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+
+-- ----------------------------
+-- Function structure for `getParentsRegionIdByRegionId`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getParentsRegionIdByRegionId`;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`terry`@`%`*/ /*!50003 FUNCTION `getParentsRegionIdByRegionId`(rootId VARCHAR(100)) RETURNS varchar(1000) CHARSET utf8
+CREATE  FUNCTION `getParentsRegionIdByRegionId`(rootId VARCHAR(100)) RETURNS varchar(1000) CHARSET utf8
+    READS SQL DATA
     COMMENT '向上递归查询地区'
 BEGIN
 
@@ -456,20 +437,7 @@ BEGIN
 
     RETURN sTemp;
 
-  END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+  END
+;;
 
 -- Dump completed on 2016-12-11  0:19:07
