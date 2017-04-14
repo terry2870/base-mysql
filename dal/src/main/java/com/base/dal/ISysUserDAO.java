@@ -66,4 +66,11 @@ public interface ISysUserDAO {
 	 * @return
 	 */
 	List<SysUser> selectByUserIds(@Param("userIds") String userIds);
+	
+	/**
+	 * 根据身份，查找用户
+	 * @param identity
+	 * @return
+	 */
+	List<SysUser> selectByIdentity(@Param("identitys") String identitys);
 }

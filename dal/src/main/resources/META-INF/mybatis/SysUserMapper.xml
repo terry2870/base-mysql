@@ -86,6 +86,11 @@
 			and user_id in (${userIds})
 		</if>
 	</select>
+	
+	<select id="selectByIdentity" resultMap="BaseResultMap">
+		select * from sys_user where 1=1
+		identity in (${identitys})
+	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from sys_user

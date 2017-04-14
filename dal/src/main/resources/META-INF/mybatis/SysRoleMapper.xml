@@ -26,7 +26,7 @@
 			AND EXISTS (SELECT 1 FROM sys_user u WHERE role.create_user_id=u.user_id AND FIND_IN_SET(u.user_id, getChildUserById(#{opera.user.userId})))
 		</if>
 		<if test="opera.manager == true">
-			AND EXISTS (SELECT 1 FROM sys_user u WHERE role.create_user_id=u.user_id AND u.store_id=#{opera.user.storeId})
+			AND EXISTS (SELECT 1 FROM sys_user u WHERE role.create_user_id=u.user_id )
 		</if>
 	</sql>
 	<select id="selectByRoleName" resultMap="BaseResultMap">
