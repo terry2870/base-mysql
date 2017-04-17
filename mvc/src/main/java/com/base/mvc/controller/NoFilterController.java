@@ -74,4 +74,5 @@ public class NoFilterController {
 		log.info("getConfigValueByKey success. with key={}, result={}", key, config);
 		return new Response<>(config);
 	}
+
 }
