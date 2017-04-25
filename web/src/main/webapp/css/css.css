@@ -59,3 +59,7 @@ html,body{
 	margin-left : 10px;
 	width: 100px;
 }
+.search_div {
+	margin-left: 10px;
+	float: left;
+}

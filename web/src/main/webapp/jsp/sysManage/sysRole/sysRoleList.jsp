@@ -1,5 +1,5 @@
-<%@page import="com.hp.tools.common.enums.StatusEnum"%>
 <%@page import="com.base.common.enums.CodeEnum"%>
+<%@page import="com.hp.tools.common.enums.StatusEnum"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="t" uri="/my-tags" %>
 <!DOCTYPE html>
@@ -18,9 +18,9 @@
 <script>
 
 	//新增或修改角色
-	function editSysRole(roleId, index) {
+	function editSysRole(index) {
+		var data = index === undefined ? {roleId:0} : $("#sysRoleListTable").myDatagrid("getRowDataByIndex", index);
 		var div = $("<div>").appendTo($(window.top.document.body));
-		var data = roleId === 0 ? {roleId:0} : $("#sysRoleListTable").myDatagrid("getRowDataByIndex", index);
 		var title = data.roleId === 0 ? "新增角色数据" : "修改角色数据";
 		window.top.$(div).myDialog({
 			width : 500,
@@ -110,7 +110,8 @@
 	}
 	
 	//删除角色
-	function delSysRole(roleId) {
+	function delSysRole(index) {
+		var data = index === undefined ? {roleId:0} : $("#sysRoleListTable").myDatagrid("getRowDataByIndex", index);
 		window.top.$.messager.confirm("确认", "您确定要删除该角色数据吗？", function(flag) {
 			if (!flag) {
 				return;
@@ -120,7 +121,7 @@
 				msg : "正在执行，请稍后..."
 			});
 			$.post("<t:path />/SysRoleController/deleteSysRole.do", {
-				roleId : roleId
+				roleId : data.roleId
 			}, function(data) {
 				window.top.$.messager.progress("close");
 				if (data.code == "<%=CodeEnum.SUCCESS.getCode()%>") {
@@ -137,7 +138,8 @@
 	}
 	
 	//分配角色菜单
-	function viewRoleMenu(roleId) {
+	function viewRoleMenu(index) {
+		var data = index === undefined ? {roleId:0} : $("#sysRoleListTable").myDatagrid("getRowDataByIndex", index);
 		var div = $("<div>").appendTo($(window.top.document.body));
 		window.top.$(div).myDialog({
 			width : "20%",
@@ -146,7 +148,7 @@
 			href : "<t:path />/jsp/sysManage/sysRole/sysRoleMenuEdit.jsp",
 			method : "post",
 			queryParams : {
-				roleId : roleId
+				roleId : data.roleId
 			},
 			modal : true,
 			collapsible : true,
@@ -208,10 +210,10 @@
 				width : 200,
 				align : "center",
 				formatter : function(value, rowData, rowIndex) {
-					var str = "<a role='view' style='margin-left:10px;display:none;' class='easyui-linkbutton' data-options=\"iconCls : 'icon-search'\" onClick='viewSysRole("+ rowIndex +");' id='viewSysRoleBtn_' + "+ rowData.roleId +">查看</a>";
-					str += "<a role='edit' style='margin-left:10px;display:none;' class='easyui-linkbutton' data-options=\"iconCls : 'icon-edit'\" onClick='editSysRole("+ rowData.roleId +", "+ rowIndex +");' id='editSysRoleBtn_' + "+ rowData.roleId +">修改</a>";
-					str += "<a role='del' style='margin-left:10px;display:none;' class='easyui-linkbutton' data-options=\"iconCls : 'icon-remove'\" onClick='delSysRole("+ rowData.roleId +");' id='delSysRoleBtn_' + "+ rowData.roleId +">删除</a>";
-					str += "<a role='roleMenu' style='margin-left:10px;display:none;' class='easyui-linkbutton' data-options=\"iconCls : 'icon-edit'\" onClick='viewRoleMenu("+ rowData.roleId +");' id='viewRoleMenuBtn_' + "+ rowData.roleId +">分配菜单</a>";
+					var str = "<a role='view' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewSysRoleBtn_' + "+ rowData.roleId +">查看</a>";
+					str += "<a role='edit' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='editSysRoleBtn_' + "+ rowData.roleId +">修改</a>";
+					str += "<a role='del' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='delSysRoleBtn_' + "+ rowData.roleId +">删除</a>";
+					str += "<a role='roleMenu' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewRoleMenuBtn_' + "+ rowData.roleId +">分配菜单</a>";
 					return str;
 				}
 			}]],
@@ -223,7 +225,30 @@
 			showFooter : true,
 			singleSelect : true,
 			onLoadSuccess : function(data) {
-				$.parser.parse($(this).datagrid("getPanel"));
+				$(this).myDatagrid("getPanel").find("a[role='view']").linkbutton({
+                    iconCls : "icon-search",
+                    onClick : function() {
+                    	viewSysRole($(this).attr("index"));
+                    }
+                });
+				$(this).myDatagrid("getPanel").find("a[role='edit']").linkbutton({
+                    iconCls : "icon-edit",
+                    onClick : function() {
+                    	editSysRole($(this).attr("index"));
+                    }
+                });
+				$(this).myDatagrid("getPanel").find("a[role='del']").linkbutton({
+                    iconCls : "icon-remove",
+                    onClick : function() {
+                    	delSysRole($(this).attr("index"));
+                    }
+                });
+				$(this).myDatagrid("getPanel").find("a[role='roleMenu']").linkbutton({
+                    iconCls : "icon-remove",
+                    onClick : function() {
+                    	viewRoleMenu($(this).attr("index"));
+                    }
+                });
 				window.top.showButtonList("<t:write name='menuId' />", $("body"), window.top.$("#<t:write name='iframeId' />").get(0).contentWindow);
 			}
 		});

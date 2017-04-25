@@ -3,12 +3,22 @@
 <%@ taglib prefix="t" uri="/my-tags" %>
 <!DOCTYPE html>
 <div class="search_text">
-	<input type="text" id="loginName" class="easyui-textbox" data-options="prompt:'登录名',width:150" />
-	<input type="text" id="userName" class="easyui-textbox" data-options="prompt:'用户名',width:150" />
+	<div class="search_div">
+		<input type="text" id="loginName" class="easyui-textbox" data-options="prompt:'登录名',width:150" />
+	</div>
+	<div class="search_div">
+		<input type="text" id="userName" class="easyui-textbox" data-options="prompt:'用户名',width:150" />
+	</div>
 	<!-- <input type="text" id="identity" /> -->
-	<input type="text" id="status" />
-	<a id="searchBtn" style="margin-left:20px" >查询</a>
-	<a id="addSysUserBtn" style="margin-left:20px;display:none" >新增</a>
+	<div class="search_div">
+		<input type="text" id="status" />
+	</div>
+	<div class="search_div">
+		<a id="searchBtn" style="margin-left:20px" >查询</a>
+	</div>
+	<div class="search_div">
+		<a id="addSysUserBtn" style="margin-left:20px;display:none" >新增</a>
+	</div>
 </div>
 <div class="search_text">
 	
@@ -33,14 +43,14 @@
 		}); */
 		
 		//状态
-		$("#userSearchDiv #status").myCombobox({
+		$("#userSearchDiv #status").combobox({
 			value : "<%=StatusEnum.OPEN.getValue()%>",
 			prompt : "状态：",
 			width : 150,
 			url : "<t:path/>/NoFilterController.do",
 			queryParams : {
 				method : 'getEnumForSelect',
-				className : 'com.hp.tools.common.enums.StatusEnum'
+				className : 'com.yoho.tools.common.enums.StatusEnum'
 			},
 			panelHeight : 100,
 			editable : false,
@@ -58,7 +68,7 @@
 		$("#userSearchDiv #addSysUserBtn").linkbutton({
 			iconCls : "icon-add",
 			onClick : function() {
-				editSysUser(0);
+				editSysUser();
 			}
 		});
 		$("#userSearchDiv,#userSearchDiv input[type='text']").keydown(function(e) {

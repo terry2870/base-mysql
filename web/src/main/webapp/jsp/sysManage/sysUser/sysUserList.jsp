@@ -1,5 +1,5 @@
-<%@page import="com.hp.tools.common.enums.StatusEnum"%>
 <%@page import="com.base.common.enums.CodeEnum"%>
+<%@page import="com.hp.tools.common.enums.StatusEnum"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="t" uri="/my-tags" %>
 <!DOCTYPE html>
@@ -18,8 +18,8 @@
 <script>
 
 	//新增或修改用户
-	function editSysUser(userId, index) {
-		var data = userId === 0 ? {userId:0} : $("#userListTable").myDatagrid("getRowDataByIndex", index);
+	function editSysUser(index) {
+		var data = index === undefined ? {userId:0} : $("#userListTable").myDatagrid("getRowDataByIndex", index);
 		var div = $("<div>").appendTo($(window.top.document.body));
 		var title = data.userId === 0 ? "新增用户" : "修改用户";
 		window.top.$(div).myDialog({
@@ -112,7 +112,8 @@
 	}
 	
 	//删除用户
-	function delSysUser(userId) {
+	function delSysUser(index) {
+		var data = $("#userListTable").myDatagrid("getRowDataByIndex", index);
 		window.top.$.messager.confirm("确认", "您确定要删除该用户吗？", function(flag) {
 			if (!flag) {
 				return;
@@ -122,7 +123,7 @@
 				msg : "正在执行，请稍后..."
 			});
 			$.post("<t:path />/SysUserController/deleteSysUser.do", {
-				userId : userId
+				userId : data.userId
 			}, function(data) {
 				window.top.$.messager.progress("close");
 				if (data.code == "<%=CodeEnum.SUCCESS.getCode()%>") {
@@ -203,9 +204,9 @@
 				width : 200,
 				align : "center",
 				formatter : function(value, rowData, rowIndex) {
-					var str = "<a role='view' style='margin-left:10px;display:none;' class='easyui-linkbutton' data-options=\"iconCls : 'icon-search'\" onClick='viewSysUser("+ rowIndex +");' id='viewSysUserBtn_' + "+ rowData.userId +">查看</a>";
-					str += "<a role='edit' style='margin-left:10px;display:none;' class='easyui-linkbutton' data-options=\"iconCls : 'icon-edit'\" onClick='editSysUser("+ rowData.userId +", "+ rowIndex +");' id='editSysUserBtn' + "+ rowData.userId +">修改</a>";
-					str += "<a role='del' style='margin-left:10px;display:none;' class='easyui-linkbutton' data-options=\"iconCls : 'icon-remove'\" onClick='delSysUser("+ rowData.userId +");' id='delSysUserBtn_' + "+ rowData.userId +">删除</a>";
+					var str = "<a role='view' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewSysUserBtn_' + "+ rowData.userId +">查看</a>";
+					str += "<a role='edit' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='editSysUserBtn' + "+ rowData.userId +">修改</a>";
+					str += "<a role='del' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='delSysUserBtn_' + "+ rowData.userId +">删除</a>";
 					return str;
 				}
 			}]],
@@ -217,7 +218,24 @@
 			showFooter : true,
 			singleSelect : true,
 			onLoadSuccess : function(data) {
-				$.parser.parse($(this).datagrid("getPanel"));
+				$(this).myDatagrid("getPanel").find("a[role='view']").linkbutton({
+                    iconCls : "icon-search",
+                    onClick : function() {
+                    	viewSysUser($(this).attr("index"));
+                    }
+                });
+				$(this).myDatagrid("getPanel").find("a[role='edit']").linkbutton({
+                    iconCls : "icon-edit",
+                    onClick : function() {
+                    	editSysUser($(this).attr("index"));
+                    }
+                });
+				$(this).myDatagrid("getPanel").find("a[role='del']").linkbutton({
+                    iconCls : "icon-remove",
+                    onClick : function() {
+                    	delSysUser($(this).attr("index"));
+                    }
+                });
 				window.top.showButtonList("<t:write name='menuId' />", $("body"), window.top.$("#<t:write name='iframeId' />").get(0).contentWindow);
 			}
 		});

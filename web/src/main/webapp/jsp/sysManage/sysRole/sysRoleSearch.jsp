@@ -3,23 +3,31 @@
 <%@ taglib prefix="t" uri="/my-tags" %>
 <!DOCTYPE html>
 <div id="sysRoleSearchDiv" class="search_text">
-	<input type="text" id="roleName" class="easyui-textbox" data-options="prompt:'角色名称',width:150" />
-	<input type="text" id="status" />
-	<a id="searchBtn" style="margin-left:20px" >查询</a>
-	<a id="addSysRoleBtn" style="margin-left:20px;display:none" >新增</a>
+	<div class="search_div">
+		<input type="text" id="roleName" class="easyui-textbox" data-options="prompt:'角色名称',width:150" />
+	</div>
+	<div class="search_div">
+		<input type="text" id="status" />
+	</div>
+	<div class="search_div">
+		<a id="searchBtn" style="margin-left:20px" >查询</a>
+	</div>
+	<div class="search_div">
+		<a id="addSysRoleBtn" style="margin-left:20px;display:none" >新增</a>
+	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
 		
 		//状态
-		$("#sysRoleSearchDiv #status").myCombobox({
+		$("#sysRoleSearchDiv #status").combobox({
 			value : "<%=StatusEnum.OPEN.getValue()%>",
 			prompt : "状态",
 			width : 150,
 			url : "<t:path/>/NoFilterController.do",
 			queryParams : {
 				method : 'getEnumForSelect',
-				className : 'com.hp.tools.common.enums.StatusEnum'
+				className : 'com.yoho.tools.common.enums.StatusEnum'
 			},
 			panelHeight : 100,
 			editable : false,
@@ -37,7 +45,7 @@
 		$("#sysRoleSearchDiv #addSysRoleBtn").linkbutton({
 			iconCls : "icon-add",
 			onClick : function() {
-				editSysRole(0);
+				editSysRole();
 			}
 		});
 		$("#sysRoleSearchDiv,#sysRoleSearchDiv input[type='text']").keydown(function(e) {
