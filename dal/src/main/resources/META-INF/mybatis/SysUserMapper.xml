@@ -48,6 +48,19 @@
 	<select id="selectByCreateUserId" resultMap="BaseResultMap">
 		select * from sys_user where status=1 and create_user_id=#{createUserId}
 	</select>
+	<select id="selectAllUserList" resultMap="BaseResultMap">
+		select user.* from sys_user user 
+		where status=1
+		<if test="user.userName != null and user.userName != ''">
+			and instr(user.user_name, #{user.userName}) &gt;0
+		</if>
+		<if test="user.loginName != null and user.loginName != ''">
+			and instr(user.login_name, #{user.loginName}) &gt;0
+		</if>
+		<if test="user.identity != null and user.identity != 0">
+			and user.identity=#{user.identity}
+		</if>
+	</select>
 	<select id="selectSysUserList" resultMap="BaseResultMap">
 		select user.* from sys_user user 
 		<include refid="selectSysUserListSQL" />

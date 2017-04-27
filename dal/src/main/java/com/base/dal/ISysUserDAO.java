@@ -73,4 +73,11 @@ public interface ISysUserDAO {
 	 * @return
 	 */
 	List<SysUser> selectByIdentity(@Param("identitys") String identitys);
+	
+	/**
+	 * 查询用户列表
+	 * @param user
+	 * @return
+	 */
+	List<SysUser> selectAllUserList(@Param("user") SysUser user);
 }

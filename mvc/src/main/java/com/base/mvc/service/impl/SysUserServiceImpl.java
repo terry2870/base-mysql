@@ -205,6 +205,20 @@ public class SysUserServiceImpl implements ISysUserService {
 		return SysUserConvert.db2BOResponse(user);
 	}
 
+	@Override
+	public List<SysUserResponseBO> queryAll(SysUserRequestBO request) throws Exception {
+		log.info("queryAll with request={}", request);
+		SysUser user = SysUserConvert.bo2DalRequest(request);
+		List<SysUser> list = sysUserDAO.selectAllUserList(user);
+		List<SysUserResponseBO> respList = new ArrayList<>();
+		for (SysUser u : list) {
+			respList.add(SysUserConvert.db2BOResponse(u));
+		}
+		baseResponseHelper.convert(respList);
+		log.info("queryAll success with request={}", request);
+		return respList;
+	}
+
 }
 
 

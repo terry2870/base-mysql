@@ -204,9 +204,9 @@
 				width : 200,
 				align : "center",
 				formatter : function(value, rowData, rowIndex) {
-					var str = "<a role='view' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewSysUserBtn_' + "+ rowData.userId +">查看</a>";
-					str += "<a role='edit' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='editSysUserBtn' + "+ rowData.userId +">修改</a>";
-					str += "<a role='del' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='delSysUserBtn_' + "+ rowData.userId +">删除</a>";
+					var str = "<a role='view' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewSysUserBtn_"+ rowData.userId +"'>查看</a>";
+					str += "<a role='edit' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='editSysUserBtn_"+ rowData.userId +"'>修改</a>";
+					str += "<a role='del' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='delSysUserBtn_"+ rowData.userId +"'>删除</a>";
 					return str;
 				}
 			}]],

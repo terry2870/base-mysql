@@ -3,18 +3,26 @@
  */
 package com.base.mvc.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.base.model.request.SysUserRequestBO;
 import com.base.model.response.SysConfigResponseBO;
+import com.base.model.response.SysUserResponseBO;
 import com.base.mvc.service.ISysConfigService;
+import com.base.mvc.service.ISysUserService;
 import com.hp.tools.common.beans.EnumTypeRequestBean;
 import com.hp.tools.common.beans.Response;
 import com.hp.tools.common.utils.ObjectUtil;
@@ -33,6 +41,8 @@ public class NoFilterController {
 	
 	@Resource
 	ISysConfigService sysConfigService;
+	@Autowired
+	ISysUserService sysUserService;
 
 
 	/**
@@ -73,6 +83,25 @@ public class NoFilterController {
 		SysConfigResponseBO config = sysConfigService.getSysConfigByKey(key);
 		log.info("getConfigValueByKey success. with key={}, result={}", key, config);
 		return new Response<>(config);
+	}
+	
+	/**
+	 * 根据条件，查询用户列表
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(params = "method=getUserList")
+	@ResponseBody
+	public Response<List<SysUserResponseBO>> getUserList(SysUserRequestBO request) throws Exception {
+		log.info("enter getUserList with request={}", request);
+		List<SysUserResponseBO> list = sysUserService.queryAll(request);
+		if (CollectionUtils.isEmpty(list)) {
+			log.warn("getUserList result is empty. with request={}", request);
+			return new Response<>(new ArrayList<>());
+		}
+		log.info("getUserList success. with request={}", request);
+		return new Response<>(list);
 	}
 
 }

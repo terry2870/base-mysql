@@ -1,5 +1,7 @@
 package com.base.mvc.service;
 
+import java.util.List;
+
 import com.base.model.request.SysUserRequestBO;
 import com.base.model.response.SysUserResponseBO;
 import com.hp.tools.common.beans.Response;
@@ -62,5 +64,13 @@ public interface ISysUserService {
 	 * @throws CommonException
 	 */
 	public SysUserResponseBO getSysUseById(int userId) throws CommonException;
+	
+	/**
+	 * 查询用户信息（不分页，不区分权限）
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	public List<SysUserResponseBO> queryAll(SysUserRequestBO request) throws Exception;
 }
 

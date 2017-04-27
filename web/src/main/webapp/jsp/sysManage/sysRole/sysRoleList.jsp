@@ -210,10 +210,10 @@
 				width : 200,
 				align : "center",
 				formatter : function(value, rowData, rowIndex) {
-					var str = "<a role='view' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewSysRoleBtn_' + "+ rowData.roleId +">查看</a>";
-					str += "<a role='edit' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='editSysRoleBtn_' + "+ rowData.roleId +">修改</a>";
-					str += "<a role='del' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='delSysRoleBtn_' + "+ rowData.roleId +">删除</a>";
-					str += "<a role='roleMenu' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewRoleMenuBtn_' + "+ rowData.roleId +">分配菜单</a>";
+					var str = "<a role='view' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewSysRoleBtn_"+ rowData.roleId +"'>查看</a>";
+					str += "<a role='edit' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='editSysRoleBtn_"+ rowData.roleId +"'>修改</a>";
+					str += "<a role='del' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='delSysRoleBtn_"+ rowData.roleId +"'>删除</a>";
+					str += "<a role='roleMenu' style='margin-left:10px;display:none;' index='"+ rowIndex +"' id='viewRoleMenuBtn_"+ rowData.roleId +"'>分配菜单</a>";
 					return str;
 				}
 			}]],

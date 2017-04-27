@@ -111,6 +111,7 @@
 			}
 			data = opt.dataType === "json" ? JSON.parse(data) : data;
 			
+			jq.data("successData", data);
 			var fileName = data;
 			if (opt.showFileName === true) {
 				if (opt.filterFileName) {
@@ -182,9 +183,17 @@
 		var opt = jq.data("fileUpload");
 		jq.append($("<input type='hidden' />").attr({
 			name : opt.realInputName
-		}).val(fileName)).append($("<span>").html(fileName.substring(fileName.lastIndexOf("/") + 1))).append($("<span>").click(function() {
+		}).val(fileName));
+		var textSpan = $("<span>").html(fileName.substring(fileName.lastIndexOf("/") + 1));
+		if (opt.onClickFile) {
+			textSpan.click(function() {
+				opt.onClickFile.call(jq, fileName);
+			});
+		}
+		var closeSpan = $("<span>").click(function() {
 			_closeFile(jq);
-		}).addClass("file-close"));
+		}).addClass("file-close");
+		jq.append(textSpan).append(closeSpan)
 	}
 	
 	function _getValue(jq) {
@@ -208,7 +217,12 @@
 			method : "POST",
 			action : opt.url
 		}).appendTo(jq);
-		form.append($("<input type='file'>").attr({
+		var inputFile = $("<input type='file'>");
+		if (opt.readonly === true) {
+			inputFile.prop("disabled", true);
+		}
+		form.append(inputFile);
+		inputFile.attr({
 			accept : opt.accept ? opt.accept : null,
 			name : opt.uploadInputName,
 			id : opt.name
@@ -218,7 +232,8 @@
 				return;
 			}
 			_submit(jq);
-		})).append($("<span>").html(opt.text));
+		});
+		form.append($("<span>").html(opt.text));
 	}
 	
 	/**
@@ -227,6 +242,10 @@
 	 * @returns
 	 */
 	function _closeFile(jq) {
+		var opt = jq.data("fileUpload");
+		if (opt.readonly === true) {
+			return;
+		}
 		var opt = jq.data("fileUpload");
 		_createForm(jq);
 	}
@@ -254,10 +273,15 @@
 		/**
 		 * 提交后，服务端有返回后触发
 		 */
-		onLoadSuccess : function(fileName, data) {}
+		onLoadSuccess : function(fileName, data) {},
+		/**
+		 * 当点击文件时
+		 */
+		onClickFile : function(fileName, data) {}
 	};
 	$.fn.fileUpload.defaults = $.extend({}, $.fn.fileUpload.event, {
 		text : "请选择文件",					//按钮文字
+		readonly : false,					//是否只读
 		uploadInputName : "file",			//上传文件的控件名称
 		realInputName : "",					//真实的文件字段名称
 		url : null,							//提交到后端的url
