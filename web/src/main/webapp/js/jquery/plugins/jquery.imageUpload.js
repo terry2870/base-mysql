@@ -113,15 +113,17 @@
 			} catch(e) {
 			}
 			
-			data = opt.dataType === "json" ? JSON.parse(data) : data;
+			data = JSON.parse(data);
 			
-			var fileName = data;
+			var fileName = data.data.fileName;
 			if (opt.filterFileName) {
 				fileName = opt.filterFileName.call(jq, data);
 			}
-			_setImage(jq, fileName);
+			if (fileName !== false) {
+				_setImage(jq, fileName);
+			}
 
-			opt.onLoadSuccess.call(jq, data, fileName);
+			opt.onLoadSuccess.call(jq, data);
 			setTimeout(function(){
 				iframe.unbind();
 				iframe.remove();
@@ -315,7 +317,7 @@
 	};
 	$.fn.imageUpload.event = {
 		onBeforeSubmit : function(value) {},
-		onLoadSuccess : function(data, fileName) {},
+		onLoadSuccess : function(data) {},
 		onCreate : function() {}
 	};
 	$.fn.imageUpload.defaults = $.extend({}, $.fn.imageUpload.event, {

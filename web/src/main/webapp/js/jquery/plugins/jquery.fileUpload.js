@@ -109,18 +109,19 @@
 				}
 			} catch(e) {
 			}
-			data = opt.dataType === "json" ? JSON.parse(data) : data;
-			
+			data = JSON.parse(data);
 			jq.data("successData", data);
-			var fileName = data;
+			var fileName = data.data.fileName;
 			if (opt.showFileName === true) {
 				if (opt.filterFileName) {
 					fileName = opt.filterFileName.call(jq, data);
 				}
-				_setFile(jq, fileName);
+				if (fileName !== false) {
+					_setFile(jq, fileName);
+				}
 			}
 			
-			opt.onLoadSuccess.call(jq, fileName, data);
+			opt.onLoadSuccess.call(jq, data);
 			setTimeout(function(){
 				iframe.unbind();
 				iframe.remove();
@@ -217,12 +218,7 @@
 			method : "POST",
 			action : opt.url
 		}).appendTo(jq);
-		var inputFile = $("<input type='file'>");
-		if (opt.readonly === true) {
-			inputFile.prop("disabled", true);
-		}
-		form.append(inputFile);
-		inputFile.attr({
+		form.append($("<input type='file'>").attr({
 			accept : opt.accept ? opt.accept : null,
 			name : opt.uploadInputName,
 			id : opt.name
@@ -232,8 +228,7 @@
 				return;
 			}
 			_submit(jq);
-		});
-		form.append($("<span>").html(opt.text));
+		})).append($("<span>").html(opt.text));
 	}
 	
 	/**
@@ -242,10 +237,6 @@
 	 * @returns
 	 */
 	function _closeFile(jq) {
-		var opt = jq.data("fileUpload");
-		if (opt.readonly === true) {
-			return;
-		}
 		var opt = jq.data("fileUpload");
 		_createForm(jq);
 	}
@@ -281,7 +272,6 @@
 	};
 	$.fn.fileUpload.defaults = $.extend({}, $.fn.fileUpload.event, {
 		text : "请选择文件",					//按钮文字
-		readonly : false,					//是否只读
 		uploadInputName : "file",			//上传文件的控件名称
 		realInputName : "",					//真实的文件字段名称
 		url : null,							//提交到后端的url
