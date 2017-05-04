@@ -115,11 +115,11 @@
 			
 			data = JSON.parse(data);
 			
-			var fileName = data.data.fileName;
+			var fileName = data.data ? data.data.fileName : null;
 			if (opt.filterFileName) {
 				fileName = opt.filterFileName.call(jq, data);
 			}
-			if (fileName !== false) {
+			if (fileName) {
 				_setImage(jq, fileName);
 			}
 

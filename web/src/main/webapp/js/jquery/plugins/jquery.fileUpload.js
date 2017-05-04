@@ -111,12 +111,12 @@
 			}
 			data = JSON.parse(data);
 			jq.data("successData", data);
-			var fileName = data.data.fileName;
+			var fileName = data.data ? data.data.fileName : null;
 			if (opt.showFileName === true) {
 				if (opt.filterFileName) {
 					fileName = opt.filterFileName.call(jq, data);
 				}
-				if (fileName !== false) {
+				if (fileName) {
 					_setFile(jq, fileName);
 				}
 			}
