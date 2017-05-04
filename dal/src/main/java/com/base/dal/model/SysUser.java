@@ -31,7 +31,7 @@ public class SysUser extends BaseBean {
 
 	private Integer updateTime;
 	
-	
+	private String identitys;
 	private Byte identity;
 	
 	public Integer getUserId() {
@@ -144,5 +144,13 @@ public class SysUser extends BaseBean {
 
 	public void setIdentity(Byte identity) {
 		this.identity = identity;
+	}
+
+	public String getIdentitys() {
+		return identitys;
+	}
+
+	public void setIdentitys(String identitys) {
+		this.identitys = identitys;
 	}
 }

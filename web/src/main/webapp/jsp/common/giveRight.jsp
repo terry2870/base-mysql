@@ -15,13 +15,13 @@
 				var btn;
 				if (target) {
 					btn = target.$(parentDiv).find("[id^='"+ item.buttonId +"']");
-					if (btn) {
+					if (btn && btn.data("linkbutton")) {
 						btn.linkbutton("enable");
 						btn.show();
 					}
 				} else {
 					btn = $(parentDiv).find("[id^='"+ item.buttonId +"']");
-					if (btn) {
+					if (btn && btn.data("linkbutton")) {
 						btn.linkbutton("enable");
 						btn.show();
 					}

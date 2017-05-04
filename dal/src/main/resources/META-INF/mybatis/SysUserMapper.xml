@@ -60,6 +60,9 @@
 		<if test="user.identity != null and user.identity != 0">
 			and user.identity=#{user.identity}
 		</if>
+		<if test="user.identitys != null and user.identitys != ''">
+			and user.identity in (${user.identitys})
+		</if>
 	</select>
 	<select id="selectSysUserList" resultMap="BaseResultMap">
 		select user.* from sys_user user 

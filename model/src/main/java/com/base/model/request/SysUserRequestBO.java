@@ -32,6 +32,8 @@ public class SysUserRequestBO extends BaseBean {
 	private Byte status;
 		
 	private Byte identity;
+	
+	private String identitys;
 
 	public Integer getUserId() {
 		return userId;
@@ -111,6 +113,14 @@ public class SysUserRequestBO extends BaseBean {
 
 	public void setIdentity(Byte identity) {
 		this.identity = identity;
+	}
+
+	public String getIdentitys() {
+		return identitys;
+	}
+
+	public void setIdentitys(String identitys) {
+		this.identitys = identitys;
 	}
 
 
