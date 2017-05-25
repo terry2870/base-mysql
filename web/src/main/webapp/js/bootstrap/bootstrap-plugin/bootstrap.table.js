@@ -82,7 +82,37 @@
 					_clickCheckAll(jq, this.checked);
 				}).appendTo(th);
 			} else {
-				th.html(item.title);
+				var headSpan = $("<span>").html(item.title);
+				th.append(headSpan);
+				if (item.sortable === true) {
+					//可排序
+					var sortSpan = $("<span>").addClass("datagrid-sort");
+					th.append(sortSpan);
+					th.css("cursor", "pointer");
+					th.click(function() {
+						//重新加载数据
+						var param = {
+							sortColumn : item.sortcolumn || item.field
+						};
+						//修改排序样式
+						if (sortSpan.hasClass("datagrid-sort")) {
+							param.sortType = "ASC";
+						} else if (sortSpan.hasClass("datagrid-sort-asc")) {
+							param.sortType = "DESC";
+						}  else if (sortSpan.hasClass("datagrid-sort-desc")) {
+							param.sortType = "ASC";
+						}
+						_loadRemote(jq, param, function() {
+							sortSpan.removeClass();
+							if (param.sortType == "ASC") {
+								sortSpan.addClass("datagrid-sort-asc");
+							} else if (param.sortType == "DESC") {
+								sortSpan.addClass("datagrid-sort-desc");
+							}
+						});
+						
+					});
+				}
 			}
 		});
 		
@@ -113,10 +143,14 @@
 	/**
 	 * 从远端加载数据
 	 */
-	function _loadRemote(jq, param) {
+	function _loadRemote(jq, param, callback) {
 		//显示正在加载
 		_showLoading(jq);
 		var opt = $(jq).data("table");
+		
+		//清空排序样式
+		jq.find("thead th span.datagrid-sort-asc").removeClass("datagrid-sort-asc").addClass("datagrid-sort");
+		jq.find("thead th span.datagrid-sort-desc").removeClass("datagrid-sort-desc").addClass("datagrid-sort");
 		
 		_removeTbody(jq);
 		if (!opt || !opt.url) {
@@ -170,6 +204,12 @@
 			error : function() {
 				//隐藏正在加载
 				_hideLoading(jq);
+			},
+			complete : function() {
+				//执行回调
+				if (callback) {
+					callback();
+				}
 			},
 			dataType : "json"
 		}));
@@ -714,11 +754,13 @@
 	});
 	/**
 	 * 其中，columns是一数组，每个数组包含字段
-	 * width=null		列宽
-	 * title=""			列标题
-	 * field=""			列属性
-	 * align="left"	对齐
-	 * checkbox=false,	是否显示复选框
+	 * width=null				列宽
+	 * title=""					列标题
+	 * field=""					列属性
+	 * align="left"				对齐
+	 * sortable=false			是否可以排序
+	 * sortcolumn=[field]		排序字段名称（默认为该字段的field）
+	 * checkbox=false,			是否显示复选框
 	 * formatter : function(value, rowData, rowIndex) {	//对列进行格式化
 			如果返回值是jquery对象，则直接把该对象放在该列
 			如果是返回值是string，则直接放在html()里面

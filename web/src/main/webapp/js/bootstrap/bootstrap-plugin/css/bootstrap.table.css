@@ -1,14 +1,31 @@
-
 .table-loading {
-	background:url(images/table-loading.gif);
-	width : 124px;
-	height : 124px;
-	position : absolute;
+	background: url(images/table-loading.gif);
+	width: 124px;
+	height: 124px;
+	position: absolute;
 }
 
 .small-loading {
-	background:url(images/small-loading.gif);
-	width : 16px;
-	height : 16px;
-	position : absolute;
+	background: url(images/small-loading.gif);
+	width: 16px;
+	height: 16px;
+	position: absolute;
+}
+
+.datagrid-sort {
+	display: inline;
+	padding: 0 13px 0 0;
+	background: url('images/table_icons.png') no-repeat -64px center;
+}
+
+.datagrid-sort-desc {
+	display: inline;
+	padding: 0 13px 0 0;
+	background: url('images/table_icons.png') no-repeat -16px center;
+}
+
+.datagrid-sort-asc {
+	display: inline;
+	padding: 0 13px 0 0;
+	background: url('images/table_icons.png') no-repeat 0px center;
 }
