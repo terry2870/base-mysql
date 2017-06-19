@@ -75,10 +75,12 @@ public class LoginController {
 			return response;
 		}
 		
+		int identity = response.getData().getIdentity().intValue();
+		
 		SessionUtil.getOperater().setUser(response.getData());
-		SessionUtil.getOperater().setSuperUser(response.getData().getIdentity().intValue() == IdentityEnum.SUPERUSER.getValue());
-		SessionUtil.getOperater().setManager(response.getData().getIdentity().intValue() == IdentityEnum.MANAGER.getValue());
-		SessionUtil.getOperater().setNormalUser(response.getData().getIdentity().intValue() == IdentityEnum.NORMAL.getValue());
+		SessionUtil.getOperater().setSuperUser(identity == IdentityEnum.SUPERUSER.getValue());
+		SessionUtil.getOperater().setManager(identity == IdentityEnum.MANAGER.getValue());
+		SessionUtil.getOperater().setNormalUser(identity != IdentityEnum.SUPERUSER.getValue() && identity != IdentityEnum.MANAGER.getValue());
 		
 		//查询用户所能看到的菜单
 		List<SysMenuResponseBO> menuList = sysMenuService.queryAllSysMenu();

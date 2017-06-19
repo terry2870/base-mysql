@@ -64,10 +64,10 @@ public class UrlInterceptor implements HandlerInterceptor {
 			response.setStatus(CodeEnum.SESSION_TIME_OUT.getCode());
 			return false;
 		}
-		
+		int identity = user.getIdentity().intValue();
 		opera.setSuperUser(user.getIdentity().intValue() == IdentityEnum.SUPERUSER.getValue());
 		opera.setManager(user.getIdentity().intValue() == IdentityEnum.MANAGER.getValue());
-		opera.setNormalUser(user.getIdentity().intValue() == IdentityEnum.NORMAL.getValue());
+		opera.setNormalUser(identity != IdentityEnum.SUPERUSER.getValue() && identity != IdentityEnum.MANAGER.getValue());
 		
 		opera.setUser(user);
 		

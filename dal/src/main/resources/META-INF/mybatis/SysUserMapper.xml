@@ -38,7 +38,7 @@
 		<if test="user.status != null and user.status != -1">
 			and user.status=#{user.status}
 		</if>
-		<if test="opera.normalUser == true">
+		<if test="opera.normalUser == true"> 
 			AND (EXISTS (SELECT 1 FROM sys_user u WHERE user.create_user_id=u.user_id AND FIND_IN_SET(u.user_id, getChildUserById(#{opera.user.userId}))) or user.login_name=#{opera.user.loginName})
 		</if>
 	</sql>
