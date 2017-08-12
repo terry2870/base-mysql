@@ -52,7 +52,8 @@
 					opt.onLoadSuccess.call(this);
 				}
 				_addSearchText(jq);
-			}
+			},
+			value : opt.value || jq.val()
 		});
 		jq.combobox(o);
 	}
