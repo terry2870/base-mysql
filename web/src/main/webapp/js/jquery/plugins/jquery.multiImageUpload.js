@@ -392,10 +392,19 @@
 			if (value == "") {
 				return;
 			}
-			if (opt.maxFileNum !== 0 && this.files.length > opt.maxFileNum) {
-				alert("超过文件数量限制");
-				return;
+			if (opt.maxFileNum !== 0) {
+				if (this.files.length > opt.maxFileNum) {
+					alert("超过文件数量限制");
+					return;
+				}
+				//获取已经有的图片数量
+				var images = _getImage(jq);
+				if (images && (images.length + this.files.length) > opt.maxFileNum) {
+					alert("超过文件数量限制");
+					return;
+				}
 			}
+			
 			_submit(jq);
 		}));
 		
