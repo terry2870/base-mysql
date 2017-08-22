@@ -98,6 +98,7 @@ public abstract class Series extends BaseEChartsBean {
 		private String type;
 		private String name;
 		private Object value;
+		private Object extraData;
 		/**
 		 * 
 		 */
@@ -136,6 +137,12 @@ public abstract class Series extends BaseEChartsBean {
 		}
 		public void setValue(Object value) {
 			this.value = value;
+		}
+		public Object getExtraData() {
+			return extraData;
+		}
+		public void setExtraData(Object extraData) {
+			this.extraData = extraData;
 		}
 		
 	}
