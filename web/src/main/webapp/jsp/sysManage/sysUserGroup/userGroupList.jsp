@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>main</title>
-<jsp:include page="/jsp/common/includeJquery.jsp" flush="true" />
+<jsp:include page="/jsp/common/include.jsp" flush="true" />
 </head>
 <body class="easyui-layout" fit="true">
 	<div region="north" title="查询条件" style="height: 70px;border-style: none">
