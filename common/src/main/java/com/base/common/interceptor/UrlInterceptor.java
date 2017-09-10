@@ -60,7 +60,7 @@ public class UrlInterceptor implements HandlerInterceptor {
 		// 过滤session失效的
 		SysUserResponseBO user = (SysUserResponseBO) request.getSession().getAttribute(BaseConstant.USER_SESSION);
 		if (user == null) {
-			log.warn("session 过期，重新登录");
+			log.warn("访问url={}， session 过期，重新登录", url);
 			response.setStatus(CodeEnum.SESSION_TIME_OUT.getCode());
 			return false;
 		}
