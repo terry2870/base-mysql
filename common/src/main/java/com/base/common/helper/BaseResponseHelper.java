@@ -54,6 +54,10 @@ public class BaseResponseHelper {
 		}
 	}
 	
+	public void convertUserName(List<? extends BaseResponseBO> list) {
+		convertUserName(list, "createUserId", "createUserName");
+	}
+	
 	/**
 	 * 设置名称
 	 * @param list
