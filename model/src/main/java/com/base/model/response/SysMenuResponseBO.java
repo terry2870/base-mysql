@@ -13,9 +13,9 @@ public class SysMenuResponseBO extends BaseResponseBO {
 
 	private Integer sortNumber;
 
-	private Byte status;
+	private Integer status;
 
-	private Byte menuType;
+	private Integer menuType;
 
 	private String buttonId;
 
@@ -71,19 +71,19 @@ public class SysMenuResponseBO extends BaseResponseBO {
 		this.sortNumber = sortNumber;
 	}
 
-	public Byte getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Byte status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public Byte getMenuType() {
+	public Integer getMenuType() {
 		return menuType;
 	}
 
-	public void setMenuType(Byte menuType) {
+	public void setMenuType(Integer menuType) {
 		this.menuType = menuType;
 	}
 

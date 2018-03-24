@@ -22,7 +22,7 @@ public class BaseResponseBO extends BaseBean {
 	private Integer updateTime;
 	private String updateTimeStr;
 
-	private Byte status;
+	private Integer status;
 	private String statusStr;
 	
 	public String getCreateUserName() {
@@ -81,11 +81,11 @@ public class BaseResponseBO extends BaseBean {
 		this.updateTime = updateTime;
 	}
 
-	public Byte getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Byte status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

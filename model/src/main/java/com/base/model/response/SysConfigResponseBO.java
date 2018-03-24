@@ -12,7 +12,7 @@ public class SysConfigResponseBO extends BaseResponseBO {
 
 	private String configValue;
 
-	private Byte status;
+	private Integer status;
 
 	private Integer createTime;
 
@@ -44,11 +44,11 @@ public class SysConfigResponseBO extends BaseResponseBO {
 		this.configValue = configValue == null ? null : configValue.trim();
 	}
 
-	public Byte getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Byte status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
