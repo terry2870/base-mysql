@@ -23,8 +23,21 @@
 				"margin-left" : "15px"
 			}).appendTo(leftDiv);
 			var totalPage = _getTotalPage(opt.totalCount, opt.pageSize);
-			//leftSpan.html("共" + opt.totalCount + "条记录..&nbsp;&nbsp;&nbsp;当前第" + opt.currentPage + "页..总共" + totalPage + "页");
-			leftSpan.html("共" + opt.totalCount + "条记录");
+			leftSpan.html("共" + opt.totalCount + "条记录..&nbsp;&nbsp;&nbsp;当前第" + opt.currentPage + "页..总共" + totalPage + "页");
+			var selectPageDiv = $("<div>").addClass("col-md-2 column").appendTo(self);
+			var selectInput = ($("<input type='number'>").css({
+				height : "30px",
+				width : "50px"
+			})).appendTo(selectPageDiv);
+			selectPageDiv.append("&nbsp;");
+			var selectBtn = $("<input type='button' value='GO' class='btn btn-primary btn-sm'>").appendTo(selectPageDiv).click(function() {
+				var newNum = selectInput.val();
+				if (!newNum) {
+					return;
+				}
+				_selectPage(self, newNum);
+			});
+			//leftSpan.html("共" + opt.totalCount + "条记录");
 			var pageDiv = $("<div>").addClass("col-md-8 column").appendTo(self);
 			
 			var ul = $("<ul>").addClass("pagination pull-right").css("margin", "5px").appendTo(pageDiv);
