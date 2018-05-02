@@ -73,7 +73,14 @@
 		if (opt.headStyle) {
 			head.css(opt.headStyle);
 		}
-		$("<h"+ opt.headTitleSize +">").addClass("panel-title").append(opt.title).appendTo(head);
+		var h = $("<h>").addClass("panel-title").appendTo(head);
+		if (opt.closeAble === true) {
+			var close = $("<a>").addClass("close").append("&times;").appendTo(h);
+			close.click(function() {
+				_destory(jq, opt);
+			});
+		}
+		h.append($("<apan>").append(opt.title));
 	}
 	
 	/**
@@ -229,6 +236,17 @@
 		$.myPlugin.hide(_getBody(jq), option);
 	}
 	
+	/**
+	 * 销毁整个panel
+	 */
+	function _destory(jq, option) {
+		var onClose = option.onClose.call(jq, option);
+		if (onClose === false) {
+			return;
+		}
+		$(jq).remove();
+	}
+	
 	//方法
 	$.fn.panel.methods = {
 		/**
@@ -314,12 +332,26 @@
 			return this.each(function() {
 				_showBody(jq, option);
 			});
+		},
+		/**
+		 * 销毁
+		 */
+		destory : function(option) {
+			var jq = this;
+			return this.each(function() {
+				_destory(jq, option);
+			});
 		}
 	};
 	
 	//事件
 	$.fn.panel.event = {
-		onLoadSuccess : function(data) {}
+		onLoadSuccess : function(data) {},
+		/**
+		 * 关闭之前执行
+		 * 如果返回false，则阻止关闭
+		 */
+		onClose : function(option) {}
 	};
 	
 	//属性
@@ -339,6 +371,7 @@
 		url : "",						//从远端加载内容
 		queryParams : {},				//从远端加载内容传递的参数
 		buttons : [],					//底部的按钮
-		showFooter : false				//是否显示底
+		showFooter : false,				//是否显示底
+		closeAble : false				//是否可以关闭
 	});
 })(jQuery);
