@@ -13,11 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.beans.page.PageModel;
-import com.hp.tools.common.beans.page.PageRequest;
-import com.hp.tools.common.beans.page.PageResponse;
-import com.hp.tools.common.enums.StatusEnum;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.beans.page.PageModel;
+import com.hp.core.common.beans.page.PageRequest;
+import com.hp.core.common.beans.page.PageResponse;
+import com.hp.core.common.enums.StatusEnum;
 import com.base.common.convert.SysRoleConvert;
 import com.base.common.enums.ActionTypeEnum;
 import com.base.common.helper.BaseResponseHelper;

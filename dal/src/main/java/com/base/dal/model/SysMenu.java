@@ -1,6 +1,6 @@
 package com.base.dal.model;
 
-import com.hp.tools.common.beans.BaseBean;
+import com.hp.core.common.beans.BaseBean;
 
 public class SysMenu extends BaseBean {
 	private static final long serialVersionUID = -823637218210922043L;

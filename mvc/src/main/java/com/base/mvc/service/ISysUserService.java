@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.base.model.request.SysUserRequestBO;
 import com.base.model.response.SysUserResponseBO;
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.beans.page.PageRequest;
-import com.hp.tools.common.beans.page.PageResponse;
-import com.hp.tools.common.exceptions.CommonException;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.beans.page.PageRequest;
+import com.hp.core.common.beans.page.PageResponse;
+import com.hp.core.common.exceptions.CommonException;
 
 /**
  * 用户接口定义

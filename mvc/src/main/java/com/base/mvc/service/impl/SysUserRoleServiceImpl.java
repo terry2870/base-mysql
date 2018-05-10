@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 import com.base.common.convert.SysUserRoleConvert;
 import com.base.common.enums.ActionTypeEnum;
 import com.base.common.utils.SessionUtil;

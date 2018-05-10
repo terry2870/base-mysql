@@ -22,7 +22,7 @@ import com.base.dal.model.SysConfig;
 import com.base.model.request.SysConfigRequestBO;
 import com.base.model.response.SysConfigResponseBO;
 import com.base.mvc.service.ISysConfigService;
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 
 /**
  * @author huangping 2016年8月28日 下午4:06:55

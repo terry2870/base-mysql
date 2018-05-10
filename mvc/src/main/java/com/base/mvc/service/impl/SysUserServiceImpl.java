@@ -24,14 +24,14 @@ import com.base.model.response.SysUserResponseBO;
 import com.base.model.response.SysUserRoleResponseBO;
 import com.base.mvc.service.ISysUserRoleService;
 import com.base.mvc.service.ISysUserService;
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.beans.page.PageModel;
-import com.hp.tools.common.beans.page.PageRequest;
-import com.hp.tools.common.beans.page.PageResponse;
-import com.hp.tools.common.enums.StatusEnum;
-import com.hp.tools.common.exceptions.CommonException;
-import com.hp.tools.common.utils.DateUtil;
-import com.hp.tools.common.utils.MD5Util;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.beans.page.PageModel;
+import com.hp.core.common.beans.page.PageRequest;
+import com.hp.core.common.beans.page.PageResponse;
+import com.hp.core.common.enums.StatusEnum;
+import com.hp.core.common.exceptions.CommonException;
+import com.hp.core.common.utils.DateUtil;
+import com.hp.core.common.utils.MD5Util;
 
 /**
  * 用户接口实现

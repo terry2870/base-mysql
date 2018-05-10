@@ -10,7 +10,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.base.model.echarts.Axis.AxisLabel;
 import com.google.common.collect.Lists;
-import com.hp.tools.common.beans.BaseBean;
+import com.hp.core.common.beans.BaseBean;
 
 /**
  * @author huangping 2016年9月27日 下午11:44:53

@@ -5,8 +5,8 @@ package com.base.common.convert;
 
 import org.springframework.beans.BeanUtils;
 
-import com.hp.tools.common.enums.StatusEnum;
-import com.hp.tools.common.utils.DateUtil;
+import com.hp.core.common.enums.StatusEnum;
+import com.hp.core.common.utils.DateUtil;
 import com.base.dal.model.SysMenu;
 import com.base.model.request.SysMenuRequestBO;
 import com.base.model.response.SysMenuResponseBO;

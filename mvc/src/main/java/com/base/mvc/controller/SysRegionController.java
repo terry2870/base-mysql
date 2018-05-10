@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.model.request.SysRegionRequestBO;
 import com.base.model.response.SysRegionResponseBO;
 import com.base.mvc.service.ISysRegionService;
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 
 
 /**

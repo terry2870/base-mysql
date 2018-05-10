@@ -5,7 +5,7 @@ package com.base.model.response;
 
 import java.util.List;
 
-import com.hp.tools.common.beans.BaseBean;
+import com.hp.core.common.beans.BaseBean;
 
 /**
  * @author ping.huang

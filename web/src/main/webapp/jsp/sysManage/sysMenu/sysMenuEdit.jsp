@@ -1,6 +1,6 @@
 <%@page import="com.base.common.enums.CodeEnum"%>
 <%@page import="com.base.common.enums.MenuTypeEnum"%>
-<%@page import="com.hp.tools.common.enums.StatusEnum"%>
+<%@page import="com.hp.core.common.enums.StatusEnum"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="t" uri="/my-tags" %>
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
 			<td align="right">状态：</td>
 			<td>
 				<input name="status" id="status" size="40" class="easyui-combobox" data-options="
-					url : '<t:path />/NoFilterController.do?method=getEnumForSelect&className=com.hp.tools.common.enums.StatusEnum',
+					url : '<t:path />/NoFilterController.do?method=getEnumForSelect&className=com.hp.core.common.enums.StatusEnum',
 					panelHeight : 100,
 					editable : false,
 					required : true,

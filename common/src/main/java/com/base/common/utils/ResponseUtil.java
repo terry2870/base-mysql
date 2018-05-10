@@ -7,9 +7,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.enums.StatusEnum;
-import com.hp.tools.common.utils.DateUtil;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.enums.StatusEnum;
+import com.hp.core.common.utils.DateUtil;
 import com.base.common.enums.CodeEnum;
 
 /**

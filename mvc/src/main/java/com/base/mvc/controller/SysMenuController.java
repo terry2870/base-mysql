@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 import com.base.common.constants.BaseConstant;
 import com.base.model.request.SysMenuRequestBO;
 import com.base.model.response.SysMenuResponseBO;

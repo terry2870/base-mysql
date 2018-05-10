@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.base.model.request.SysRegionRequestBO;
 import com.base.model.response.SysRegionResponseBO;
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 
 /**
  * 地区的接口

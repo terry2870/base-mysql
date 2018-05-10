@@ -23,8 +23,8 @@ import com.base.model.request.SysMenuRequestBO;
 import com.base.model.response.SysMenuResponseBO;
 import com.base.model.response.SysUserResponseBO;
 import com.base.mvc.service.ISysMenuService;
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.exceptions.CommonException;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.exceptions.CommonException;
 
 /**
  * @author huangping

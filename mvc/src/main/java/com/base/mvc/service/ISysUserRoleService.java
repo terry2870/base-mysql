@@ -5,7 +5,7 @@ package com.base.mvc.service;
 
 import java.util.List;
 
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 import com.base.model.response.SysUserRoleResponseBO;
 
 /**

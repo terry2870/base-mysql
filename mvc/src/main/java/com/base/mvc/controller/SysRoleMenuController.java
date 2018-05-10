@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 import com.base.model.response.SysRoleMenuResponseBO;
 import com.base.mvc.service.ISysRoleMenuService;
 

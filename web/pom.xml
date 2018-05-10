@@ -21,6 +21,10 @@
 			<groupId>com.base</groupId>
 			<artifactId>base-mysql-model</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.hp.core</groupId>
+			<artifactId>hp-core-jsptags</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<defaultGoal>compile</defaultGoal>

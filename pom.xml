@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.hp.tools</groupId>
-		<artifactId>hp-tools</artifactId>
+		<groupId>com.hp.core</groupId>
+		<artifactId>hp-core</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -52,17 +52,8 @@
 	<dependencies>
 		
 		<dependency>
-			<groupId>com.hp.tools</groupId>
-			<artifactId>hp-tools-common</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.hp.tools</groupId>
-			<artifactId>hp-tools-jsptags</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.hp.core</groupId>
 			<artifactId>hp-core-mybatis</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

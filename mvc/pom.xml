@@ -19,5 +19,9 @@
 			<groupId>com.base</groupId>
 			<artifactId>base-mysql-common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.hp.core</groupId>
+			<artifactId>hp-core-queue</artifactId>
+		</dependency>
 	</dependencies>
 </project>

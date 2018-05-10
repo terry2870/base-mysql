@@ -49,7 +49,7 @@
 		<ref bean="urlInterceptor" />
 	</mvc:interceptors>
 	
-	<bean id="springContextUtil" class="com.hp.tools.common.utils.SpringContextUtil" />
+	<bean id="springContextUtil" class="com.hp.core.common.utils.SpringContextUtil" />
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="utf-8"></property>

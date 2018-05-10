@@ -6,7 +6,7 @@ package com.base.model.echarts;
 import java.util.Collection;
 
 import com.google.common.collect.Lists;
-import com.hp.tools.common.beans.BaseBean;
+import com.hp.core.common.beans.BaseBean;
 
 /**
  * @author huangping

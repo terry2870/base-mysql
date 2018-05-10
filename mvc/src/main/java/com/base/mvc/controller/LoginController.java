@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.exceptions.CommonException;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.exceptions.CommonException;
 import com.base.common.constants.BaseConstant;
 import com.base.common.enums.IdentityEnum;
 import com.base.common.interceptor.UrlInterceptor;

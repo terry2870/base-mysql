@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.model.response.QueueResponseBO;
 import com.base.model.response.QueueResponseBO.Topic;
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.queue.HPQueueFactory;
+import com.hp.core.common.beans.Response;
+import com.hp.core.queue.factory.HPQueueFactory;
 
 /**
  * @author ping.huang

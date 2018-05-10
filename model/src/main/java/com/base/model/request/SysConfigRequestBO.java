@@ -1,6 +1,6 @@
 package com.base.model.request;
 
-import com.hp.tools.common.beans.BaseBean;
+import com.hp.core.common.beans.BaseBean;
 
 public class SysConfigRequestBO extends BaseBean {
 	/**

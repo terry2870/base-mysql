@@ -1,4 +1,4 @@
-<%@page import="com.hp.tools.common.enums.StatusEnum"%>
+<%@page import="com.hp.core.common.enums.StatusEnum"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="t" uri="/my-tags"%>
 <!DOCTYPE html>
@@ -142,7 +142,7 @@
 			url : "<t:path/>/NoFilterController.do",
 			queryParams : {
 				method : 'getEnumForSelect',
-				className : 'com.hp.tools.common.enums.StatusEnum'
+				className : 'com.hp.core.common.enums.StatusEnum'
 			},
 			label : '状态：',
 			labelWidth : 100,

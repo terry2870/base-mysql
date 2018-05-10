@@ -1,6 +1,6 @@
 package com.base.dal.model;
 
-import com.hp.tools.common.beans.BaseBean;
+import com.hp.core.common.beans.BaseBean;
 
 public class SysUser extends BaseBean {
 	private static final long serialVersionUID = -6079671205083041356L;

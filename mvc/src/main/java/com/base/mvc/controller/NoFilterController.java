@@ -23,9 +23,9 @@ import com.base.model.response.SysConfigResponseBO;
 import com.base.model.response.SysUserResponseBO;
 import com.base.mvc.service.ISysConfigService;
 import com.base.mvc.service.ISysUserService;
-import com.hp.tools.common.beans.EnumTypeRequestBean;
-import com.hp.tools.common.beans.Response;
-import com.hp.tools.common.utils.ObjectUtil;
+import com.hp.core.common.beans.EnumTypeRequestBean;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.utils.ObjectUtil;
 
 
 /**

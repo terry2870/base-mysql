@@ -21,10 +21,10 @@ import org.springframework.stereotype.Component;
 import com.base.dal.ISysUserDAO;
 import com.base.dal.model.SysUser;
 import com.base.model.response.BaseResponseBO;
-import com.hp.tools.common.enums.StatusEnum;
-import com.hp.tools.common.utils.DateUtil;
-import com.hp.tools.common.utils.MapUtil;
-import com.hp.tools.common.utils.MapUtil.Function;
+import com.hp.core.common.enums.StatusEnum;
+import com.hp.core.common.utils.DateUtil;
+import com.hp.core.common.utils.MapUtil;
+import com.hp.core.common.utils.MapUtil.Function;
 
 /**
  * @author huangping

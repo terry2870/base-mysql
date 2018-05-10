@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.hp.tools.common.beans.page.PageModel;
+import com.hp.core.common.beans.page.PageModel;
 import com.base.dal.model.SysRole;
 import com.base.model.OperaBean;
 

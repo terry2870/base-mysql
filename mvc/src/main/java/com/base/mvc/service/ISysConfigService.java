@@ -2,7 +2,7 @@ package com.base.mvc.service;
 
 import com.base.model.request.SysConfigRequestBO;
 import com.base.model.response.SysConfigResponseBO;
-import com.hp.tools.common.beans.Response;
+import com.hp.core.common.beans.Response;
 
 /**
  * 用户接口定义

@@ -1,6 +1,6 @@
 package com.base.dal.model;
 
-import com.hp.tools.common.beans.BaseBean;
+import com.hp.core.common.beans.BaseBean;
 
 public class SysUserRole extends BaseBean {
 	private static final long serialVersionUID = -7929178352943087223L;
