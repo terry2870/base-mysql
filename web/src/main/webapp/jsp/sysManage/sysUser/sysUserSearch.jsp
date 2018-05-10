@@ -50,7 +50,7 @@
 			url : "<t:path/>/NoFilterController.do",
 			queryParams : {
 				method : 'getEnumForSelect',
-				className : 'com.yoho.tools.common.enums.StatusEnum'
+				className : 'com.hp.tools.common.enums.StatusEnum'
 			},
 			panelHeight : 100,
 			editable : false,

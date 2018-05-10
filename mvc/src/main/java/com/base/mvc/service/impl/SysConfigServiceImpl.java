@@ -5,13 +5,16 @@ package com.base.mvc.service.impl;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.common.constants.BaseConstant;
 import com.base.common.convert.SysConfigConvert;
 import com.base.common.enums.ActionTypeEnum;
+import com.base.common.helper.SystemLoadHelper;
 import com.base.common.utils.ResponseUtil;
 import com.base.common.utils.SessionUtil;
 import com.base.dal.ISysConfigDAO;
@@ -30,11 +33,16 @@ public class SysConfigServiceImpl implements ISysConfigService {
 	static Logger log = LoggerFactory.getLogger(SysConfigServiceImpl.class);
 
 	@Resource
-	ISysConfigDAO sysConfigDAO;
+	private ISysConfigDAO sysConfigDAO;
+	@Autowired
+	private SystemLoadHelper systemLoadHelper;
 
 	@Override
 	public SysConfigResponseBO getSysConfigByKey(String key) throws Exception {
 		log.info("getSysConfigByKey with key={}", key);
+		if (MapUtils.isEmpty(BaseConstant.SYS_CONFIG_MAP)) {
+			systemLoadHelper.init();
+		}
 		SysConfigResponseBO config = BaseConstant.SYS_CONFIG_MAP.getOrDefault(key, new SysConfigResponseBO());
 		log.info("getSysConfigByKey success. result={}, with key={}", config, key);
 		return config;

@@ -5,7 +5,6 @@ package com.base.common.helper;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -33,9 +32,7 @@ public class SystemLoadHelper {
 	/**
 	 * 初始化系统做一些事情
 	 */
-	@PostConstruct
 	public void init() {
-		
 		//加载系统配置变量
 		loadSysConfig();
 	}
