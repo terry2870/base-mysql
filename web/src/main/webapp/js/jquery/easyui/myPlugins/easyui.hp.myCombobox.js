@@ -73,6 +73,8 @@
 		}).appendTo(dropPanel);
 		listDiv.append(oldList);
 		
+		searchText.on("mousedown",function(e){e.stopPropagation();});
+		
 		searchText.keyup(function() {
 			var value = this.value;
 			var d = opt.loadFilter ? opt.loadFilter(opt.data) : opt.data;
@@ -84,7 +86,7 @@
 			var data = [];
 			var list = _getListDiv(jq).find("div");
 			$(list).each(function(item, index) {
-				if ($(this).html().indexOf(value) >= 0) {
+				if ($(this).html().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
 					$(this).show();
 				} else {
 					$(this).hide();
