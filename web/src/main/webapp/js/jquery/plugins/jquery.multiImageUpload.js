@@ -236,6 +236,7 @@
 		li.draggable({
 			proxy : "clone",
 			revert : true,
+			delay : 500,
 			handle : li.selector,
 			onStartDrag : function() {
 				$(this).draggable("proxy").removeClass("multi_image_upload_image multi_image_upload_proxy_enter");
@@ -292,16 +293,17 @@
 		}).insertBefore(uploadForm);
 		var imageDiv = $("<div role='image'>").addClass("img_div").appendTo(imageLi);
 		imageDiv.append($("<img />").attr({
-			src : fileItem.fileName,
+			src : fileItem.fileName || fileItem.url,
 			width : "100%",
 			height : "100%"
 		})).append($("<input type='hidden'>").attr({
 			name : opt.realInputName,
 			width : fileItem.width || "",
 			height : fileItem.height || ""
-		}).val(fileItem.fileName));
+		}).val(fileItem.fileName || fileItem.url));
 		if (opt.readonly !== true) {
-			imageDiv.append($("<span>").click(function() {
+			imageDiv.append($("<span>").click(function(event) {
+				event.stopPropagation();
 				_closeFile(this, jq);
 			}).addClass("file_close"));
 		}
@@ -316,6 +318,7 @@
 				textDiv.html(opt.text);
 			}
 		}
+		
 		
 		_setDraggable(jq, imageLi);
 	}
@@ -343,7 +346,8 @@
 		var arr = [];
 		$(obj).each(function(index, item) {
 			arr.push({
-				fileName : $(this).val(),
+				url : $(this).val(),
+				//fileName : $(this).val(),
 				width : $(this).attr("width"),
 				height : $(this).attr("height")
 			});
