@@ -15,7 +15,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<fileupload.version>1.3.2</fileupload.version>
-		<jackson.version>2.8.1</jackson.version>
+		<jackson.version>2.9.6</jackson.version>
 		<jackson.asl.version>1.9.13</jackson.asl.version>
 	</properties>
 	
@@ -74,7 +74,7 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${jackson.asl.version}</version>
@@ -83,7 +83,7 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
 			<version>${jackson.asl.version}</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 	
 	<modules>
