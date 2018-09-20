@@ -32,7 +32,7 @@
 					panelHeight : 100,
 					editable : false,
 					required : true,
-					value : '<t:write name='status' defaultValue='<%=StatusEnum.A.toString()%>' />',
+					value : '<t:write name='status' defaultValue='<%=StatusEnum.OPEN.toString()%>' />',
 					missingMessage : '状态必须选择！'
 				" />
 			</td>

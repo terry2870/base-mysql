@@ -1,4 +1,4 @@
-<%@page import="com.baseProjectMysql.enums.ReturnCodeEnum"%>
+<%@page import="com.base.common.enums.ReturnCodeEnum"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="t" uri="/my-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
