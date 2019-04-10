@@ -25,13 +25,13 @@ import com.base.model.response.SysUserRoleResponseBO;
 import com.base.mvc.service.ISysUserRoleService;
 import com.base.mvc.service.ISysUserService;
 import com.hp.core.common.beans.Response;
-import com.hp.core.common.beans.page.PageModel;
-import com.hp.core.common.beans.page.PageRequest;
 import com.hp.core.common.beans.page.PageResponse;
 import com.hp.core.common.enums.StatusEnum;
 import com.hp.core.common.exceptions.CommonException;
 import com.hp.core.common.utils.DateUtil;
 import com.hp.core.common.utils.MD5Util;
+import com.hp.core.database.bean.PageModel;
+import com.hp.core.database.bean.PageRequest;
 
 /**
  * 用户接口实现

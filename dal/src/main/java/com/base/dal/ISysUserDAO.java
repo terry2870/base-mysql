@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.hp.core.common.beans.page.PageModel;
 import com.base.dal.model.SysUser;
 import com.base.model.OperaBean;
+import com.hp.core.database.bean.PageModel;
 
 public interface ISysUserDAO {
 	int deleteByPrimaryKey(Integer userId);

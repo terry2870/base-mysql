@@ -13,11 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.hp.core.common.beans.Response;
-import com.hp.core.common.beans.page.PageModel;
-import com.hp.core.common.beans.page.PageRequest;
-import com.hp.core.common.beans.page.PageResponse;
-import com.hp.core.common.enums.StatusEnum;
 import com.base.common.convert.SysRoleConvert;
 import com.base.common.enums.ActionTypeEnum;
 import com.base.common.helper.BaseResponseHelper;
@@ -31,6 +26,11 @@ import com.base.dal.model.SysUserRole;
 import com.base.model.request.SysRoleRequestBO;
 import com.base.model.response.SysRoleResponseBO;
 import com.base.mvc.service.ISysRoleService;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.beans.page.PageResponse;
+import com.hp.core.common.enums.StatusEnum;
+import com.hp.core.database.bean.PageModel;
+import com.hp.core.database.bean.PageRequest;
 
 /**
  * @author huangping

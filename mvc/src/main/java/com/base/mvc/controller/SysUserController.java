@@ -11,13 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hp.core.common.beans.Response;
-import com.hp.core.common.beans.page.PageRequest;
-import com.hp.core.common.beans.page.PageResponse;
 import com.base.common.utils.SessionUtil;
 import com.base.model.request.SysUserRequestBO;
 import com.base.model.response.SysUserResponseBO;
 import com.base.mvc.service.ISysUserService;
+import com.hp.core.common.beans.Response;
+import com.hp.core.common.beans.page.PageResponse;
+import com.hp.core.database.bean.PageRequest;
 
 /**
  * @author huangping
