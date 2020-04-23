@@ -29,10 +29,10 @@ public class BaseExceptionHandler implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object paramObject, Exception exception) {
-		log.error("enter resolveException with exception={}", exception);
 		if (exception == null) {
 			return null;
 		}
+		log.warn("enter resolveException with exception={}", exception.getMessage());
 		// 数据库超时异常，特殊处理
 		if (exception instanceof QueryTimeoutException) {
 			response.setStatus(CodeEnum.DATABASE_TIME_OUT.getCode());
@@ -48,6 +48,8 @@ public class BaseExceptionHandler implements HandlerExceptionResolver {
 			response.setStatus(commonException.getCode());
 			return getErrorJsonView(commonException.getCode(), commonException.getMessage());
 		}
+		
+		log.error("enter resolveException with exception={}", exception);
 		response.setStatus(CodeEnum.ERROR.getCode());
 		return getErrorJsonView(CodeEnum.ERROR.getCode(), exception.getMessage());
 	}
