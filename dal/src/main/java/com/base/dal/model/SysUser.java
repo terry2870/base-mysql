@@ -34,6 +34,9 @@ public class SysUser extends BaseBean {
 	private String identitys;
 	private Byte identity;
 	
+	private Integer salaryStatic;
+	private String cardNumber;
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -152,5 +155,21 @@ public class SysUser extends BaseBean {
 
 	public void setIdentitys(String identitys) {
 		this.identitys = identitys;
+	}
+
+	public Integer getSalaryStatic() {
+		return salaryStatic;
+	}
+
+	public void setSalaryStatic(Integer salaryStatic) {
+		this.salaryStatic = salaryStatic;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 }

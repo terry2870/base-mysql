@@ -34,6 +34,10 @@ public class SysUserRequestBO extends BaseBean {
 	private Byte identity;
 	
 	private String identitys;
+	
+	private Integer salaryStatic;
+	
+	private String cardNumber;
 
 	public Integer getUserId() {
 		return userId;
@@ -121,6 +125,22 @@ public class SysUserRequestBO extends BaseBean {
 
 	public void setIdentitys(String identitys) {
 		this.identitys = identitys;
+	}
+
+	public Integer getSalaryStatic() {
+		return salaryStatic;
+	}
+
+	public void setSalaryStatic(Integer salaryStatic) {
+		this.salaryStatic = salaryStatic;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 

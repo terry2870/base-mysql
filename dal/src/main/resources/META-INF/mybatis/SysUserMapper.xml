@@ -2,27 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.dal.ISysUserDAO">
 	<resultMap id="BaseResultMap" type="com.base.dal.model.SysUser">
-		<id column="user_id" property="userId" jdbcType="INTEGER" />
-		<result column="user_name" property="userName" jdbcType="VARCHAR" />
-		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
-		<result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
-		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
-		<result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
-		<result column="address" property="address" jdbcType="VARCHAR" />
-		<result column="email" property="email" jdbcType="VARCHAR" />
-		<result column="status" property="status" jdbcType="TINYINT" />
-		<result column="create_user_id" property="createUserId"
-			jdbcType="INTEGER" />
-		<result column="last_login_time" property="lastLoginTime"
-			jdbcType="INTEGER" />
-		<result column="create_time" property="createTime" jdbcType="INTEGER" />
-		<result column="update_time" property="updateTime" jdbcType="INTEGER" />
-		<result column="identity" property="identity" jdbcType="TINYINT" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		user_id, user_name, login_name, login_pwd, mobile, phone_number, address,
 		email,
-		status, create_user_id, last_login_time, create_time, update_time, identity
+		status, create_user_id, last_login_time, create_time, update_time, identity, salary_static, card_number
 	</sql>
 	<sql id="selectSysUserListSQL">
 		where 1=1
@@ -113,10 +97,10 @@
 		where user_id = #{userId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.base.dal.model.SysUser" keyProperty="userId" useGeneratedKeys="true">
-		insert into sys_user (user_name, login_name, login_pwd, mobile, phone_number, address, email, status, create_user_id, last_login_time, create_time, update_time, identity)
+		insert into sys_user (user_name, login_name, login_pwd, mobile, phone_number, address, email, status, create_user_id, last_login_time, create_time, update_time, identity, salary_static, card_number)
 		values (#{userName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
 		#{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createUserId,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
-		#{updateTime,jdbcType=INTEGER}, #{identity})
+		#{updateTime,jdbcType=INTEGER}, #{identity}, #{salaryStatic}, #{cardNumber})
 	</insert>
 	
 	<update id="updateByPrimaryKeySelective" parameterType="com.base.dal.model.SysUser">
@@ -161,6 +145,12 @@
 			<if test="identity != null">
 				identity = #{identity},
 			</if>
+			<if test="salaryStatic != null">
+				salary_static = #{salaryStatic},
+			</if>
+			<if test="cardNumber != null">
+				card_number = #{cardNumber},
+			</if>
 		</set>
 		where user_id = #{userId,jdbcType=INTEGER}
 	</update>
@@ -173,7 +163,8 @@
 		email = #{email,jdbcType=VARCHAR},
 		status = #{status,jdbcType=TINYINT},
 		update_time = #{updateTime,jdbcType=INTEGER},
-		identity = #{identity}
+		identity = #{identity},
+		salary_static = #{salaryStatic}, card_number = #{cardNumber}
 		where user_id = #{userId,jdbcType=INTEGER}
 	</update>
 </mapper>
