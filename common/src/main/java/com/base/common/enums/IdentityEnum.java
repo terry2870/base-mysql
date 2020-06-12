@@ -15,7 +15,16 @@ public enum IdentityEnum {
 	
 	SUPERUSER(1, "超级管理员"),
 	MANAGER(2, "普通管理员"),
-	NORMAL(3, "普通员工");
+	NORMAL(3, "普通员工"),
+	BILL_MANAGE(4, "发票管理员"),
+	CHECK_COMPANY(5, "检测公司"),
+	OUT_USER(6, "外协人员"),
+	VERIFY_USER(7, "项目审核人员"),
+	PROJECT_MANAGE(8, "部门主管"),
+	BUSINESS_USER(9, "业务人员"),
+	
+//	FILE_USER(8, "项目归档人员"),
+	;
 	
 
 	private IdentityEnum(int value, String name) {
