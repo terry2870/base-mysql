@@ -46,7 +46,7 @@ public class ResponseUtil {
 				BeanUtils.setProperty(obj, "status", StatusEnum.OPEN.getValue());
 			}
 		} catch (Exception e) {
-			log.info("setAddBaseData error with obj={}", obj, e);
+			//log.info("setAddBaseData error with obj={}", obj, e);
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class ResponseUtil {
 			int now = DateUtil.getCurrentTimeSeconds();
 			BeanUtils.setProperty(obj, "updateTime", now);
 		} catch (Exception e) {
-			log.info("setAddBaseData error with obj={}", obj, e);
+			//log.info("setAddBaseData error with obj={}", obj, e);
 		}
 	}
 }
