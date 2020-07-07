@@ -3,6 +3,8 @@
  */
 package com.base.dal.model;
 
+import javax.persistence.Transient;
+
 import com.hp.core.common.beans.BaseBean;
 
 /**
@@ -13,8 +15,10 @@ public class BaseModel extends BaseBean {
 
 	private static final long serialVersionUID = 6397691203861423315L;
 
-	
+	@Transient
 	private String queryStartDate;
+	
+	@Transient
 	private String queryEndDate;
 	public String getQueryStartDate() {
 		return queryStartDate;
