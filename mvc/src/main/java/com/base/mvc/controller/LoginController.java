@@ -2,21 +2,17 @@ package com.base.mvc.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.hp.core.common.beans.Response;
-import com.hp.core.common.exceptions.CommonException;
 import com.base.common.constants.BaseConstant;
 import com.base.common.enums.IdentityEnum;
-import com.base.common.interceptor.UrlInterceptor;
 import com.base.common.utils.ResponseUtil;
 import com.base.common.utils.SessionUtil;
 import com.base.model.request.SysUserRequestBO;
@@ -24,6 +20,7 @@ import com.base.model.response.SysMenuResponseBO;
 import com.base.model.response.SysUserResponseBO;
 import com.base.mvc.service.ISysMenuService;
 import com.base.mvc.service.ISysUserService;
+import com.hp.core.common.beans.Response;
 
 
 
@@ -32,20 +29,16 @@ import com.base.mvc.service.ISysUserService;
  * @author hp
  * 2014-03-11
  */
-@Controller
+@RestController
 @RequestMapping("/LoginController")
 public class LoginController {
 	
-	static Logger log = LoggerFactory.getLogger(LoginController.class);
+	private static Logger log = LoggerFactory.getLogger(LoginController.class);
 	
-	@Resource
-	ISysUserService sysUserService;
-	
-	@Resource
-	ISysMenuService sysMenuService;
-	
-	@Resource
-	UrlInterceptor urlInterceptor;
+	@Autowired
+	private ISysUserService sysUserService;
+	@Autowired
+	private ISysMenuService sysMenuService;
 	
 	/**
 	 * 登录
@@ -53,8 +46,7 @@ public class LoginController {
 	 * @param response
 	 */
 	@RequestMapping("/login.do")
-	@ResponseBody
-	public Response<SysUserResponseBO> login(SysUserRequestBO request, String checkCode, HttpSession session) throws Exception {
+	public Response<SysUserResponseBO> login(SysUserRequestBO request, String checkCode, HttpSession session) {
 		log.info("login start with request={}, checkCode={}", request, checkCode);
 		
 		//检查验证码
@@ -96,13 +88,10 @@ public class LoginController {
 	/**
 	 * 获取登录的用户信息
 	 * @return
-	 * @throws CommonException
 	 */
 	@RequestMapping("/getUserInfo.do")
-	@ResponseBody
-	public Response<SysUserResponseBO> getUserInfo(HttpSession session) throws CommonException {
-		SysUserResponseBO bo = (SysUserResponseBO) session.getAttribute(BaseConstant.USER_SESSION);
-		return new Response<>(bo);
+	public Response<SysUserResponseBO> getUserInfo(HttpSession session) {
+		return new Response<>(sysUserService.getSessionUserInfo(session));
 	}
 
 

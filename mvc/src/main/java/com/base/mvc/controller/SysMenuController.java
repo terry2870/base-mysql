@@ -3,42 +3,39 @@ package com.base.mvc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.hp.core.common.beans.Response;
 import com.base.common.constants.BaseConstant;
 import com.base.model.request.SysMenuRequestBO;
 import com.base.model.response.SysMenuResponseBO;
 import com.base.mvc.service.ISysMenuService;
+import com.hp.core.common.beans.Response;
 
 
 /**
  * @author huangping
  * 2013-08-15
  */
-@Controller
+@RestController
 @RequestMapping("/SysMenuController")
 public class SysMenuController {
 	
 	static Logger log = LoggerFactory.getLogger(SysMenuController.class);
 
-	@Resource
-	ISysMenuService sysMenuService;
+	@Autowired
+	private ISysMenuService sysMenuService;
 	
 	/**
 	 * 查询当前登录用户所能看到的菜单
-	 * @throws Exception
 	 */
 	@RequestMapping("/queryAllSysMenu.do")
-	@ResponseBody
-	public List<SysMenuResponseBO> queryAllSysMenu() throws Exception {
+	public List<SysMenuResponseBO> queryAllSysMenu() {
 		log.info("queryAllSysMenu start");
 		List<SysMenuResponseBO> list = sysMenuService.queryAllSysMenu();
 		if (list == null) {
@@ -55,7 +52,6 @@ public class SysMenuController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/queryUserSessionMenu.do")
-	@ResponseBody
 	public Response<List<SysMenuResponseBO>> queryUserSessionMenu(HttpSession session) {
 		log.info("queryUserSessionMenu start");
 		List<SysMenuResponseBO> list = (List<SysMenuResponseBO>) session.getAttribute(BaseConstant.USER_MENU);
@@ -71,7 +67,6 @@ public class SysMenuController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/querySessionButtonByMenuId.do")
-	@ResponseBody
 	public Response<List<SysMenuResponseBO>> querySessionButtonByMenuId(HttpSession session, Integer menuId) {
 		log.info("querySessionButtonByMenuId start");
 		List<SysMenuResponseBO> list = (List<SysMenuResponseBO>) session.getAttribute(BaseConstant.USER_MENU);
@@ -89,11 +84,9 @@ public class SysMenuController {
 	 * 保存菜单数据
 	 * @param request
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/saveSyMenu.do")
-	@ResponseBody
-	public Response<?> saveSyMenu(SysMenuRequestBO request) throws Exception {
+	public Response<?> saveSyMenu(SysMenuRequestBO request) {
 		log.info("saveSyMenu with request={}", request);
 		Response<?> response = sysMenuService.saveSysMenu(request);
 		log.info("saveSyMenu success. with request={}", request);
@@ -104,11 +97,9 @@ public class SysMenuController {
 	 * 删除菜单
 	 * @param userId
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/deleteSysMenu.do")
-	@ResponseBody
-	public Response<?> deleteSysMenu(int menuId) throws Exception {
+	public Response<?> deleteSysMenu(int menuId) {
 		log.info("deleteSysMenu with menuId={}", menuId);
 		Response<?> response = sysMenuService.deleteSysMenu(menuId);
 		log.info("deleteSysMenu success. with menuId={}", menuId);

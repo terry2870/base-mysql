@@ -21,22 +21,19 @@ public interface ISysRoleService {
 	 * @param request
 	 * @param pageRequest
 	 * @return
-	 * @throws Exception
 	 */
-	public PageResponse<SysRoleResponseBO> queryAllSysRole(SysRoleRequestBO request, PageRequest pageRequest) throws Exception;
+	public PageResponse<SysRoleResponseBO> queryAllSysRole(SysRoleRequestBO request, PageRequest pageRequest);
 	
 	/**
 	 * 保存角色信息
 	 * @param request
 	 * @return
-	 * @throws Exception
 	 */
-	public Response<?> saveSysRole(SysRoleRequestBO request) throws Exception;
+	public Response<?> saveSysRole(SysRoleRequestBO request);
 	
 	/**
 	 * 删除角色信息
 	 * @param roleId 需要删除的roleId
-	 * @throws Exception
 	 */
-	public Response<?> deleteSysRole(int roleId) throws Exception;
+	public Response<?> deleteSysRole(int roleId);
 }

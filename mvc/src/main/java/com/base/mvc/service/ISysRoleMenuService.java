@@ -19,21 +19,21 @@ public interface ISysRoleMenuService {
 	 * @param roleId
 	 * @return
 	 */
-	List<SysRoleMenuResponseBO> selectByRoleId(Integer roleId) throws Exception;
+	List<SysRoleMenuResponseBO> selectByRoleId(Integer roleId);
 	
 	/**
 	 * 根据菜单id，查询
 	 * @param roleId
 	 * @return
 	 */
-	List<SysRoleMenuResponseBO> selectByMenuId(Integer menuId) throws Exception;
+	List<SysRoleMenuResponseBO> selectByMenuId(Integer menuId);
 	
 	/**
 	 * 批量插入角色菜单
 	 * @param roleId
 	 * @param menuIds
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
-	Response<?> saveSysRoleMenu(Integer roleId, String menuIds) throws Exception;
+	Response<?> saveSysRoleMenu(Integer roleId, String menuIds);
 }

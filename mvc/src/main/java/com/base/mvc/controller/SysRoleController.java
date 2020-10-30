@@ -3,13 +3,11 @@
  */
 package com.base.mvc.controller;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.base.model.request.SysRoleRequestBO;
 import com.base.model.response.SysRoleResponseBO;
@@ -22,25 +20,23 @@ import com.hp.core.database.bean.PageRequest;
  * @author huangping
  * 2016年8月26日 上午12:36:12
  */
-@Controller
+@RestController
 @RequestMapping("/SysRoleController")
 public class SysRoleController {
 
 	Logger log = LoggerFactory.getLogger(SysRoleController.class);
 	
-	@Resource
-	ISysRoleService sysRoleService;
+	@Autowired
+	private ISysRoleService sysRoleService;
 	
 	/**
 	 * 查询角色
 	 * @param request
 	 * @param pageRequest
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/queryAllSysRole.do")
-	@ResponseBody
-	public Response<PageResponse<SysRoleResponseBO>> queryAllSysRole(SysRoleRequestBO request, PageRequest pageRequest) throws Exception {
+	public Response<PageResponse<SysRoleResponseBO>> queryAllSysRole(SysRoleRequestBO request, PageRequest pageRequest) {
 		log.info("queryAllSysRole with request={}", request);
 		PageResponse<SysRoleResponseBO> list = sysRoleService.queryAllSysRole(request, pageRequest);
 		if (list == null) {
@@ -54,11 +50,9 @@ public class SysRoleController {
 	 * 保存角色数据
 	 * @param request
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/saveSysRole.do")
-	@ResponseBody
-	public Response<?> saveSysRole(SysRoleRequestBO request) throws Exception {
+	public Response<?> saveSysRole(SysRoleRequestBO request) {
 		log.info("saveSysRole with request={}", request);
 		Response<?> response = sysRoleService.saveSysRole(request);
 		log.info("saveSysRole success. with request={}", request);
@@ -69,11 +63,9 @@ public class SysRoleController {
 	 * 删除角色
 	 * @param roleId
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/deleteSysRole.do")
-	@ResponseBody
-	public Response<?> deleteSysRole(int roleId) throws Exception {
+	public Response<?> deleteSysRole(int roleId) {
 		log.info("deleteSysRole with roleId={}", roleId);
 		Response<?> response = sysRoleService.deleteSysRole(roleId);
 		log.info("deleteSysRole success. with roleId={}", roleId);

@@ -1,5 +1,7 @@
 package com.base.model.response;
 
+import com.hp.core.common.beans.BaseResponseBO;
+
 public class SysConfigResponseBO extends BaseResponseBO {
 	/**
 	 * 

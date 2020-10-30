@@ -1,5 +1,7 @@
 package com.base.model.response;
 
+import com.hp.core.common.beans.BaseResponseBO;
+
 public class SysMenuResponseBO extends BaseResponseBO {
 	private static final long serialVersionUID = -823637218210922043L;
 

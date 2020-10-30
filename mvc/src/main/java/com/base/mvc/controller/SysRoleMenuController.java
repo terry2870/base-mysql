@@ -6,31 +6,29 @@ package com.base.mvc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.hp.core.common.beans.Response;
 import com.base.model.response.SysRoleMenuResponseBO;
 import com.base.mvc.service.ISysRoleMenuService;
+import com.hp.core.common.beans.Response;
 
 /**
  * @author huangping
  * 2016年9月11日 下午9:56:05
  */
-@Controller
+@RestController
 @RequestMapping("/SysRoleMenuController")
 public class SysRoleMenuController {
 
-	static Logger log = LoggerFactory.getLogger(SysRoleMenuController.class);
+	private static Logger log = LoggerFactory.getLogger(SysRoleMenuController.class);
 	
-	@Resource
-	ISysRoleMenuService sysRoleMenuService;
+	@Autowired
+	private ISysRoleMenuService sysRoleMenuService;
 	
 	/**
 	 * 根据角色id，获取菜单
@@ -38,8 +36,7 @@ public class SysRoleMenuController {
 	 * @return
 	 */
 	@RequestMapping("/querySysMenuByRoleId.do")
-	@ResponseBody
-	public Response<List<SysRoleMenuResponseBO>> querySysMenuByRoleId(Integer roleId) throws Exception {
+	public Response<List<SysRoleMenuResponseBO>> querySysMenuByRoleId(Integer roleId) {
 		log.info("querySysMenuByRoleId with roleId={}", roleId);
 		List<SysRoleMenuResponseBO> list = sysRoleMenuService.selectByRoleId(roleId);
 		log.info("queryUserSessionMenu success");
@@ -54,11 +51,9 @@ public class SysRoleMenuController {
 	 * @param roleId
 	 * @param menuIds
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/saveSysRoleMenu.do")
-	@ResponseBody
-	public Response<?> saveSysRoleMenu(Integer roleId, String menuIds) throws Exception {
+	public Response<?> saveSysRoleMenu(Integer roleId, String menuIds) {
 		log.info("saveSysRoleMenu with roleId={}, menuIds={}", roleId, menuIds);
 		Response<?> response = sysRoleMenuService.saveSysRoleMenu(roleId, menuIds);
 		log.info("saveSysRoleMenu response={}. with roleId={}, menuIds={}", response, roleId, menuIds);

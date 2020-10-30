@@ -15,17 +15,15 @@ public interface ISysConfigService {
 	 * 根据key获取值
 	 * @param key
 	 * @return
-	 * @throws Exception
 	 */
-	public SysConfigResponseBO getSysConfigByKey(String key) throws Exception;
+	public SysConfigResponseBO getSysConfigByKey(String key);
 	
 	/**
 	 * 根据key，更新value
 	 * @param request
 	 * @return
-	 * @throws Exception
 	 */
-	public Response<?> updateByConfigKey(SysConfigRequestBO request) throws Exception;
+	public Response<?> updateByConfigKey(SysConfigRequestBO request);
 	
 }
 

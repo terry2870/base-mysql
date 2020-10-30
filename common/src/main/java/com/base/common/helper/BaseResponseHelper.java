@@ -8,19 +8,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.base.dal.ISysUserDAO;
 import com.base.dal.model.SysUser;
-import com.base.model.response.BaseResponseBO;
+import com.hp.core.common.beans.BaseResponseBO;
 import com.hp.core.common.enums.StatusEnum;
 import com.hp.core.common.utils.DateUtil;
 import com.hp.core.common.utils.MapUtil;
@@ -34,10 +33,10 @@ import com.hp.core.common.utils.MapUtil.Function;
 public class BaseResponseHelper {
 
 	
-	static Logger log = LoggerFactory.getLogger(BaseResponseHelper.class);
+	private static Logger log = LoggerFactory.getLogger(BaseResponseHelper.class);
 	
-	@Resource
-	ISysUserDAO sysUserDAO;
+	@Autowired
+	private ISysUserDAO sysUserDAO;
 	
 	/**
 	 * 设置员工名
@@ -82,7 +81,7 @@ public class BaseResponseHelper {
 			}
 			Map<String, SysUser> userMap = null;
 			List<SysUser> userList = sysUserDAO.selectByUserIds(StringUtils.join(userSet, ","));
-			userMap = MapUtil.list2map(userList, new Function<String, SysUser>() {
+			userMap = MapUtil.list2Map(userList, new Function<String, SysUser>() {
 				@Override
 				public String apply(SysUser input) {
 					return input.getUserId().toString();

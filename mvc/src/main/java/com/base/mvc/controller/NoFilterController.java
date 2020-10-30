@@ -6,15 +6,12 @@ package com.base.mvc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -33,16 +30,16 @@ import com.hp.core.common.utils.ObjectUtil;
  * 
  * @author ping.huang 2016年5月6日
  */
-@Controller
+@RestController
 @RequestMapping("/NoFilterController.do")
 public class NoFilterController {
 
 	static Logger log = LoggerFactory.getLogger(NoFilterController.class);
 	
-	@Resource
-	ISysConfigService sysConfigService;
 	@Autowired
-	ISysUserService sysUserService;
+	private ISysConfigService sysConfigService;
+	@Autowired
+	private ISysUserService sysUserService;
 
 
 	/**
@@ -50,10 +47,9 @@ public class NoFilterController {
 	 * 
 	 * @param bo
 	 * @return
-	 * @throws Exception
+	 * @throws Exception 
 	 */
 	@RequestMapping(params = "method=getEnumForSelect")
-	@ResponseBody
 	public Response<JSONArray> getEnumForSelect(EnumTypeRequestBean bo) throws Exception {
 		log.info("enter getEnumForSelect with EnumTypeRequestBO={}", bo);
 		String className = bo.getClassName();
@@ -74,11 +70,9 @@ public class NoFilterController {
 	 * 根据配置key，获取值
 	 * @param key
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping(params = "method=getConfigByKey")
-	@ResponseBody
-	public Response<SysConfigResponseBO> getConfigByKey(String key) throws Exception {
+	public Response<SysConfigResponseBO> getConfigByKey(String key) {
 		log.info("enter getConfigValueByKey with key={}", key);
 		SysConfigResponseBO config = sysConfigService.getSysConfigByKey(key);
 		log.info("getConfigValueByKey success. with key={}, result={}", key, config);
@@ -89,11 +83,9 @@ public class NoFilterController {
 	 * 根据条件，查询用户列表
 	 * @param request
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping(params = "method=getUserList")
-	@ResponseBody
-	public Response<List<SysUserResponseBO>> getUserList(SysUserRequestBO request) throws Exception {
+	public Response<List<SysUserResponseBO>> getUserList(SysUserRequestBO request) {
 		log.info("enter getUserList with request={}", request);
 		List<SysUserResponseBO> list = sysUserService.queryAll(request);
 		if (CollectionUtils.isEmpty(list)) {

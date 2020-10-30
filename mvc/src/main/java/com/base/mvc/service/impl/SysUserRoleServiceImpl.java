@@ -6,15 +6,13 @@ package com.base.mvc.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hp.core.common.beans.Response;
 import com.base.common.convert.SysUserRoleConvert;
 import com.base.common.enums.ActionTypeEnum;
 import com.base.common.utils.SessionUtil;
@@ -22,6 +20,7 @@ import com.base.dal.ISysUserRoleDAO;
 import com.base.dal.model.SysUserRole;
 import com.base.model.response.SysUserRoleResponseBO;
 import com.base.mvc.service.ISysUserRoleService;
+import com.hp.core.common.beans.Response;
 
 /**
  * @author huangping
@@ -30,13 +29,13 @@ import com.base.mvc.service.ISysUserRoleService;
 @Service
 public class SysUserRoleServiceImpl implements ISysUserRoleService {
 
-	static Logger log = LoggerFactory.getLogger(SysUserRoleServiceImpl.class);
+	private static Logger log = LoggerFactory.getLogger(SysUserRoleServiceImpl.class);
 	
-	@Resource
-	ISysUserRoleDAO sysUserRoleDAO;
+	@Autowired
+	private ISysUserRoleDAO sysUserRoleDAO;
 	
 	@Override
-	public List<SysUserRoleResponseBO> selectByUserId(int userId) throws Exception {
+	public List<SysUserRoleResponseBO> selectByUserId(int userId) {
 		log.info("selectByUserId with userId={}", userId);
 		List<SysUserRole> list = sysUserRoleDAO.selectByUserId(userId);
 		if (CollectionUtils.isEmpty(list)) {
@@ -52,7 +51,7 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
 	}
 
 	@Override
-	public Response<?> insertUserRole(int userId, String roleIds) throws Exception {
+	public Response<?> insertUserRole(int userId, String roleIds) {
 		log.info("insertUserRole with userId={}, roleIds={}", roleIds);
 		SessionUtil.getOperater().setOperaType(ActionTypeEnum.ADD.getValue());
 		//首先删除

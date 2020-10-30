@@ -38,7 +38,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
 	private SystemLoadHelper systemLoadHelper;
 
 	@Override
-	public SysConfigResponseBO getSysConfigByKey(String key) throws Exception {
+	public SysConfigResponseBO getSysConfigByKey(String key) {
 		log.info("getSysConfigByKey with key={}", key);
 		if (MapUtils.isEmpty(BaseConstant.SYS_CONFIG_MAP)) {
 			systemLoadHelper.init();
@@ -49,7 +49,7 @@ public class SysConfigServiceImpl implements ISysConfigService {
 	}
 
 	@Override
-	public Response<?> updateByConfigKey(SysConfigRequestBO request) throws Exception {
+	public Response<?> updateByConfigKey(SysConfigRequestBO request) {
 		log.info("updateByConfigKey with request={}", request);
 		
 		//更新缓存

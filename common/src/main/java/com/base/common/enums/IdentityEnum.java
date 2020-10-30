@@ -16,7 +16,7 @@ public enum IdentityEnum {
 	SUPERUSER(1, "超级管理员"),
 	MANAGER(2, "普通管理员"),
 	NORMAL(3, "普通员工"),
-	BILL_MANAGE(4, "发票管理员"),
+	BILL_MANAGE(4, "项目管理员"),
 	CHECK_COMPANY(5, "检测公司"),
 	OUT_USER(6, "外协人员"),
 	VERIFY_USER(7, "项目审核人员"),

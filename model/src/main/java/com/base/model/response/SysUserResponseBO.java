@@ -3,6 +3,8 @@
  */
 package com.base.model.response;
 
+import com.hp.core.common.beans.BaseResponseBO;
+
 /**
  * @author huangping
  * 2016年8月23日 下午11:14:45

@@ -6,11 +6,10 @@ package com.base.mvc.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.common.convert.SysRoleConvert;
@@ -19,7 +18,6 @@ import com.base.common.helper.BaseResponseHelper;
 import com.base.common.utils.ResponseUtil;
 import com.base.common.utils.SessionUtil;
 import com.base.dal.ISysRoleDAO;
-import com.base.dal.ISysRoleMenuDAO;
 import com.base.dal.ISysUserRoleDAO;
 import com.base.dal.model.SysRole;
 import com.base.dal.model.SysUserRole;
@@ -39,19 +37,17 @@ import com.hp.core.database.bean.PageRequest;
 @Service
 public class SysRoleServiceImpl implements ISysRoleService {
 
-	static Logger log = LoggerFactory.getLogger(SysRoleServiceImpl.class);
+	private static Logger log = LoggerFactory.getLogger(SysRoleServiceImpl.class);
 	
-	@Resource
-	ISysRoleDAO sysRoleDAO;
-	@Resource
-	ISysRoleMenuDAO sysRoleMenuDAO;
-	@Resource
-	ISysUserRoleDAO sysUserRoleDAO;
-	@Resource
-	BaseResponseHelper baseResponseHelper;
+	@Autowired
+	private ISysRoleDAO sysRoleDAO;
+	@Autowired
+	private ISysUserRoleDAO sysUserRoleDAO;
+	@Autowired
+	private BaseResponseHelper baseResponseHelper;
 	
 	@Override
-	public PageResponse<SysRoleResponseBO> queryAllSysRole(SysRoleRequestBO request, PageRequest pageRequest) throws Exception {
+	public PageResponse<SysRoleResponseBO> queryAllSysRole(SysRoleRequestBO request, PageRequest pageRequest) {
 		log.info("queryAllSysRole with request={}", request);
 		SysRole role = SysRoleConvert.bo2DalRequest(request);
 		PageModel page = pageRequest.toPageModel();
@@ -73,7 +69,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
 	}
 	
 	@Override
-	public Response<?> saveSysRole(SysRoleRequestBO request) throws Exception {
+	public Response<?> saveSysRole(SysRoleRequestBO request) {
 		log.info("saveSysRole with request={}", request);
 		SysRole ar = SysRoleConvert.bo2DalRequest(request);
 		
@@ -102,7 +98,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
 	}
 
 	@Override
-	public Response<?> deleteSysRole(int roleId) throws Exception {
+	public Response<?> deleteSysRole(int roleId) {
 		log.info("deleteSysRole with roleId={}", roleId);
 		
 		/*List<SysRoleMenu> roleMenuList = sysRoleMenuDAO.selectByRoleId(roleId);

@@ -37,7 +37,7 @@ public class SysRegionServiceImpl implements ISysRegionService {
 	
 
 	@Override
-	public List<SysRegionResponseBO> queryRegionInfoByParentRegionId(int parentRegionId) throws Exception {
+	public List<SysRegionResponseBO> queryRegionInfoByParentRegionId(int parentRegionId) {
 		log.info("queryRegionInfoByParentRegionId with parentRegionCode={}", parentRegionId);
 		List<SysRegion> list = sysRegionDAO.queryRegionInfoByParentRegionId(parentRegionId);
 		if (CollectionUtils.isEmpty(list)) {
@@ -52,7 +52,7 @@ public class SysRegionServiceImpl implements ISysRegionService {
 	}
 
 	@Override
-	public List<SysRegionResponseBO> queryAllRegion() throws Exception {
+	public List<SysRegionResponseBO> queryAllRegion() {
 		log.info("queryAllRegion");
 		List<SysRegion> list = sysRegionDAO.queryAllRegion();
 		if (CollectionUtils.isEmpty(list)) {
@@ -67,7 +67,7 @@ public class SysRegionServiceImpl implements ISysRegionService {
 	}
 
 	@Override
-	public Response<?> deleteSysRegion(int regionId) throws Exception {
+	public Response<?> deleteSysRegion(int regionId) {
 		log.info("deleteSysRegion with regionId={}", regionId);
 		SessionUtil.getOperater().setOperaType(ActionTypeEnum.DELETE.getValue());
 		
@@ -84,7 +84,7 @@ public class SysRegionServiceImpl implements ISysRegionService {
 	}
 
 	@Override
-	public Response<?> saveSysRegion(SysRegionRequestBO request) throws Exception {
+	public Response<?> saveSysRegion(SysRegionRequestBO request) {
 		log.info("saveSysRegion with request={}", request);
 		SysRegion region = SysRegionConvert.bo2DalRequest(request);
 		if (region.getRegionId() == null || region.getRegionId() == 0) {

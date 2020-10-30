@@ -5,7 +5,6 @@ import java.util.List;
 import com.base.model.request.SysMenuRequestBO;
 import com.base.model.response.SysMenuResponseBO;
 import com.hp.core.common.beans.Response;
-import com.hp.core.common.exceptions.CommonException;
 
 /**
  * @author huangping
@@ -16,33 +15,29 @@ public interface ISysMenuService {
 	/**
 	 * 按照权限，查询菜单
 	 * @return
-	 * @throws Exception
 	 */
-	public List<SysMenuResponseBO> queryAllSysMenu() throws Exception;
+	public List<SysMenuResponseBO> queryAllSysMenu();
 	
 	/**
 	 * 新增或修改
 	 * @param request
 	 * @return
-	 * @throws Exception
 	 */
-	public Response<?> saveSysMenu(SysMenuRequestBO request) throws Exception;
+	public Response<?> saveSysMenu(SysMenuRequestBO request);
 	
 	/**
 	 * 删除菜单
 	 * @param menuId
 	 * @return
-	 * @throws Exception
 	 */
-	public Response<?> deleteSysMenu(int menuId) throws Exception;
+	public Response<?> deleteSysMenu(int menuId);
 	
 	/**
 	 * 根据id，查询菜单
 	 * @param menuId
 	 * @return
-	 * @throws CommonException
 	 */
-	public SysMenuResponseBO getSysMenuById(int menuId) throws CommonException;
+	public SysMenuResponseBO getSysMenuById(int menuId);
 	
 }
 

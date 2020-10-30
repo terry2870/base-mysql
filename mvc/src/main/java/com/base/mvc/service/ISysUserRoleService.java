@@ -18,16 +18,14 @@ public interface ISysUserRoleService {
 	 * 查询该用户的角色
 	 * @param userId
 	 * @return
-	 * @throws Exception
 	 */
-	List<SysUserRoleResponseBO> selectByUserId(int userId) throws Exception;
+	List<SysUserRoleResponseBO> selectByUserId(int userId);
 	
 	/**
 	 * 插入用户的角色关系
 	 * @param userId
 	 * @param roleIds
 	 * @return
-	 * @throws Exception
 	 */
-	Response<?> insertUserRole(int userId, String roleIds) throws Exception;
+	Response<?> insertUserRole(int userId, String roleIds);
 }

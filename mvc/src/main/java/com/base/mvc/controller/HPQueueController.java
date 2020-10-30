@@ -12,9 +12,8 @@ import java.util.concurrent.BlockingQueue;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.base.model.response.QueueResponseBO;
 import com.base.model.response.QueueResponseBO.Topic;
@@ -25,7 +24,7 @@ import com.hp.core.queue.factory.HPQueueFactory;
  * @author ping.huang
  * 2017年4月17日
  */
-@Controller
+@RestController
 @RequestMapping("/HPQueueController.do")
 public class HPQueueController {
 
@@ -35,11 +34,9 @@ public class HPQueueController {
 	 * 获取队列信息
 	 * @param topic
 	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping(params = "method=getQueueSize")
-	@ResponseBody
-	public Response<QueueResponseBO> getQueueSize(String topic) throws Exception {
+	public Response<QueueResponseBO> getQueueSize(String topic) {
 		log.info("enter getQueueSize with topic={}", topic);
 		QueueResponseBO bo = new QueueResponseBO();
 		if (StringUtils.isNotEmpty(topic)) {

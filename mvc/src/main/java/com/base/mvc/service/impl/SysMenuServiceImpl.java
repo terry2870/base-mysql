@@ -41,7 +41,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 	ISysRoleMenuDAO sysRoleMenuDAO;
 
 	@Override
-	public List<SysMenuResponseBO> queryAllSysMenu() throws Exception {
+	public List<SysMenuResponseBO> queryAllSysMenu() {
 		log.info("queryAllSysMenu start");
 		SysUserResponseBO user = SessionUtil.getSessionUser();
 		List<SysMenu> list = null;
@@ -69,7 +69,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 	}
 
 	@Override
-	public Response<?> saveSysMenu(SysMenuRequestBO request) throws Exception {
+	public Response<?> saveSysMenu(SysMenuRequestBO request) {
 		log.info("saveSysMenu with request={}", request);
 		SysMenu m = sysMenuDAO.selectByMenuNameAndPid(request.getMenuName(), request.getParentMenuId());
 		SysMenu menu = SysMenuConvert.bo2DalRequest(request);
@@ -97,7 +97,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 	}
 
 	@Override
-	public Response<?> deleteSysMenu(int menuId) throws Exception {
+	public Response<?> deleteSysMenu(int menuId) {
 		log.info("deleteSysMenu with menuId={}", menuId);
 		List<SysRoleMenu> roleMenuList = sysRoleMenuDAO.selectByMenuId(menuId);
 		if (CollectionUtils.isNotEmpty(roleMenuList)) {

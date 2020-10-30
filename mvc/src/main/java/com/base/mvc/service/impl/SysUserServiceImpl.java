@@ -3,14 +3,16 @@ package com.base.mvc.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.common.constants.BaseConstant;
 import com.base.common.convert.SysUserConvert;
 import com.base.common.enums.ActionTypeEnum;
 import com.base.common.helper.BaseResponseHelper;
@@ -41,18 +43,17 @@ import com.hp.core.database.bean.PageRequest;
 @Service
 public class SysUserServiceImpl implements ISysUserService {
 
-	static Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
+	private static Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
 	
-	@Resource
-	ISysUserDAO sysUserDAO;
-	
-	@Resource
-	ISysUserRoleService sysUserRoleService;
-	@Resource
-	BaseResponseHelper baseResponseHelper;
+	@Autowired
+	private ISysUserDAO sysUserDAO;
+	@Autowired
+	private ISysUserRoleService sysUserRoleService;
+	@Autowired
+	private BaseResponseHelper baseResponseHelper;
 
 	@Override
-	public Response<SysUserResponseBO> login(SysUserRequestBO request) throws Exception {
+	public Response<SysUserResponseBO> login(SysUserRequestBO request) {
 		log.info("login start with request={}", request);
 		OperaBean opera = SessionUtil.getOperater();
 		opera.setOperaType(ActionTypeEnum.LOGIN.getValue());
@@ -83,7 +84,7 @@ public class SysUserServiceImpl implements ISysUserService {
 	}
 
 	@Override
-	public Response<?> saveUser(SysUserRequestBO request, String roleIds) throws Exception {
+	public Response<?> saveUser(SysUserRequestBO request, String roleIds) {
 		log.info("saveUser with request={}, roleIds={}", request, roleIds);
 		int userId = request.getUserId();
 		if (userId == 0) {
@@ -129,7 +130,7 @@ public class SysUserServiceImpl implements ISysUserService {
 	}
 
 	@Override
-	public Response<?> deleteUser(int userId) throws Exception {
+	public Response<?> deleteUser(int userId) {
 		log.info("deleteUser with userId={}", userId);
 		
 		List<SysUser> list = sysUserDAO.selectByCreateUserId(userId);
@@ -154,7 +155,7 @@ public class SysUserServiceImpl implements ISysUserService {
 	}
 
 	@Override
-	public Response<?> modifyPwd(String oldPwd, String newPwd) throws Exception {
+	public Response<?> modifyPwd(String oldPwd, String newPwd) {
 		int userId = SessionUtil.getSessionUser().getUserId();
 		log.info("enter modifyPwd with userId={}", userId);
 		
@@ -176,7 +177,7 @@ public class SysUserServiceImpl implements ISysUserService {
 	}
 
 	@Override
-	public PageResponse<SysUserResponseBO> queryAllUser(SysUserRequestBO request, PageRequest pageRequest) throws Exception {
+	public PageResponse<SysUserResponseBO> queryAllUser(SysUserRequestBO request, PageRequest pageRequest) {
 		log.info("queryAllUser with request={}", request);
 		SysUser user = SysUserConvert.bo2DalRequest(request);
 		PageModel page = pageRequest.toPageModel();
@@ -206,7 +207,7 @@ public class SysUserServiceImpl implements ISysUserService {
 	}
 
 	@Override
-	public List<SysUserResponseBO> queryAll(SysUserRequestBO request) throws Exception {
+	public List<SysUserResponseBO> queryAll(SysUserRequestBO request) {
 		log.info("queryAll with request={}", request);
 		SysUser user = SysUserConvert.bo2DalRequest(request);
 		List<SysUser> list = sysUserDAO.selectAllUserList(user);
@@ -217,6 +218,11 @@ public class SysUserServiceImpl implements ISysUserService {
 		baseResponseHelper.convert(respList);
 		log.info("queryAll success with request={}", request);
 		return respList;
+	}
+
+	@Override
+	public SysUserResponseBO getSessionUserInfo(HttpSession session) {
+		return (SysUserResponseBO) session.getAttribute(BaseConstant.USER_SESSION);
 	}
 
 }

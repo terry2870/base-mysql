@@ -1,5 +1,7 @@
 package com.base.model.response;
 
+import com.hp.core.common.beans.BaseResponseBO;
+
 public class SysRoleResponseBO extends BaseResponseBO {
 	private static final long serialVersionUID = -1812874514783322491L;
 
