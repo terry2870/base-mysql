@@ -22,6 +22,7 @@ public enum IdentityEnum {
 	VERIFY_USER(7, "项目审核人员"),
 	PROJECT_MANAGE(8, "部门主管"),
 	BUSINESS_USER(9, "业务人员"),
+	BUSINESS_MANAGER(10, "业务主管"),
 	
 //	FILE_USER(8, "项目归档人员"),
 	;
