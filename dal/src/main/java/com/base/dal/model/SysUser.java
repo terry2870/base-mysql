@@ -21,7 +21,7 @@ public class SysUser extends BaseBean {
 
 	private String email;
 
-	private Byte status;
+	private Integer status;
 
 	private Integer createUserId;
 
@@ -101,11 +101,11 @@ public class SysUser extends BaseBean {
 		this.email = email == null ? null : email.trim();
 	}
 
-	public Byte getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Byte status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

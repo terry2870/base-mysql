@@ -148,7 +148,7 @@ public class SysUserServiceImpl implements ISysUserService {
 		SessionUtil.getOperater().setOperaType(ActionTypeEnum.DELETE.getValue());
 		SysUser user = new SysUser();
 		user.setUserId(userId);
-		user.setStatus((byte)StatusEnum.DELETE.getValue());
+		user.setStatus(StatusEnum.DELETE.getValue());
 		sysUserDAO.updateByPrimaryKeySelective(user);
 		log.info("deleteUser success. with userId={}", userId);
 		return new Response<>();
