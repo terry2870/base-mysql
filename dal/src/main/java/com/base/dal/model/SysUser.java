@@ -37,6 +37,9 @@ public class SysUser extends BaseBean {
 	private Integer salaryStatic;
 	private String cardNumber;
 	
+	private Integer onJob;
+	
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -171,5 +174,13 @@ public class SysUser extends BaseBean {
 
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
+	}
+
+	public Integer getOnJob() {
+		return onJob;
+	}
+
+	public void setOnJob(Integer onJob) {
+		this.onJob = onJob;
 	}
 }

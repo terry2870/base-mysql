@@ -9,6 +9,7 @@ import com.base.common.enums.IdentityEnum;
 import com.base.dal.model.SysUser;
 import com.base.model.request.SysUserRequestBO;
 import com.base.model.response.SysUserResponseBO;
+import com.hp.core.common.enums.YesOrNoEnum;
 
 /**
  * @author huangping
@@ -45,6 +46,7 @@ public class SysUserConvert {
 		SysUserResponseBO bo = new SysUserResponseBO();
 		BeanUtils.copyProperties(user, bo);
 		bo.setIdentityStr(IdentityEnum.getNameByValue(bo.getIdentity()));
+		bo.setOnJobStr(YesOrNoEnum.getTextByValue(user.getOnJob()));
 		return bo;
 	}
 }

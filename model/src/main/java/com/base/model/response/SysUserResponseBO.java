@@ -39,6 +39,9 @@ public class SysUserResponseBO extends BaseResponseBO {
 	private Integer salaryStatic;
 	
 	private String cardNumber;
+	
+	private Integer onJob;
+	private String onJobStr;
 
 	public Integer getUserId() {
 		return userId;
@@ -142,5 +145,21 @@ public class SysUserResponseBO extends BaseResponseBO {
 
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
+	}
+
+	public Integer getOnJob() {
+		return onJob;
+	}
+
+	public void setOnJob(Integer onJob) {
+		this.onJob = onJob;
+	}
+
+	public String getOnJobStr() {
+		return onJobStr;
+	}
+
+	public void setOnJobStr(String onJobStr) {
+		this.onJobStr = onJobStr;
 	}
 }
