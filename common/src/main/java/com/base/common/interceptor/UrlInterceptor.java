@@ -46,6 +46,7 @@ public class UrlInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		String url = (String) request.getAttribute("javax.servlet.include.request_uri");
+		log.error("12345");
 		OperaBean opera = new OperaBean();
 		opera.setUserIp(request.getRemoteAddr());
 		localUser.set(opera);
